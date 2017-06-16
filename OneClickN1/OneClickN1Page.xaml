@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:OneClickN1" x:Class="OneClickN1.OneClickN1Page">
+<AbsoluteLayout>
+<Image x:Name="background" Source="Background.jpg" Aspect="AspectFill" AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 1.0"
+               AbsoluteLayout.LayoutFlags="All" />
+        <AbsoluteLayout.BackgroundColor>#f3f3f3</AbsoluteLayout.BackgroundColor>
+
+        <StackLayout
+            AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 1.0"
+            AbsoluteLayout.LayoutFlags="All">
+
+          <!--  <Frame OutlineColor="Accent"
+                   WidthRequest="300"
+                   HorizontalOptions="Center"
+                   VerticalOptions="CenterAndExpand"
+                BackgroundColor="White">-->
+
+            <StackLayout WidthRequest="300"
+                   HorizontalOptions="Center"
+                   VerticalOptions="CenterAndExpand">
+                <StackLayout Spacing="25">
+                    
+                    <StackLayout>
+                        <Image Source="Logo2.png" HeightRequest="100" WidthRequest="100"/>
+                    <Label HorizontalOptions="Center" VerticalOptions="Center" TextColor="White">
+                        <Label.FormattedText>
+                        <FormattedString>
+                        <Span x:Name="titleLabel" Text="oneclick"  FontSize="30">
+                        <Span.FontFamily>
+                                      <OnPlatform x:TypeArguments="x:String">
+                                      <OnPlatform.iOS>FredokaOne-Regular</OnPlatform.iOS>
+                                            <OnPlatform.Android>FredokaOne-Regular.tff#FredokaOne-Regular</OnPlatform.Android> 
+                                        </OnPlatform>   
+                                    </Span.FontFamily>
+                                </Span>
+                                <Span Text=".newsN1" FontSize="30" />
+                                
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    </StackLayout>
+                    
+                    <StackLayout>
+                    <Entry Placeholder="Введите ключевые слова" PlaceholderColor="Gray" HeightRequest="40" />
+                    <Button x:Name="searchTag" Text="ПОИСК" BackgroundColor="Blue" FontAttributes="Bold" TextColor="White" HeightRequest="40" />
+                        </StackLayout>
+                    <StackLayout>
+                    <Label Text="OneClick - сервис предоставляющий быстрый поиск новостей по интересующим Вас темам. Введите ключевые слова или предложения для нахождения соответствующих новостей." TextColor="White" XAlign="Center" />
+                        </StackLayout>
+                    <StackLayout Spacing="15">
+                    <Button Text="Перейти к newsN1" TextColor="White" BorderColor="White" BorderWidth="2" />
+                        <Button Text="Наш бот в Telegram" BorderColor="White" TextColor="White" BorderWidth="2"/>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+            <!--</Frame>-->
+        </StackLayout>
+        
+        
+    </AbsoluteLayout>
+</ContentPage>
