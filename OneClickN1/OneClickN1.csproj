@@ -31,6 +31,9 @@
     <EmbeddedResource Include="App.xaml" />
     <EmbeddedResource Include="OneClickN1Page.xaml" />
     <EmbeddedResource Include="Resources\Background.jpg" />
+    <EmbeddedResource Include="OneClickN1NewsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -40,6 +43,9 @@
       <DependentUpon>OneClickN1Page.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="OneClickN1NewsPage.xaml.cs">
+      <DependentUpon>OneClickN1NewsPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">
@@ -55,10 +61,16 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Resources\FredokaOne-Regular.ttf" />
-    <None Include="Resources\Logo.jpg" />
+    <None Include="Resources\LogoN1.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\LogoN1button.png" />
+    <BundleResource Include="Resources\telegramLogo.png" />
+    <BundleResource Include="Resources\LogoN1v2.png" />
+    <BundleResource Include="Resources\N1Logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.3.4.231\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.4.231\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />

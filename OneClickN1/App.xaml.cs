@@ -8,7 +8,7 @@ namespace OneClickN1
         {
             InitializeComponent();
 
-            MainPage = new OneClickN1Page();
+            MainPage = new NavigationPage (new OneClickN1Page());
         }
 
         protected override void OnStart()

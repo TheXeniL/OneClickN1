@@ -46,5 +46,7 @@
 	<array>
 		<string>FredokaOne-Regular.ttf</string>
 	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 </dict>
 </plist>

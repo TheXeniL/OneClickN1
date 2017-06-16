@@ -15,6 +15,7 @@ namespace OneClickN1.iOS
             global::Xamarin.Forms.Forms.Init();
 
             LoadApplication(new App());
+            UIApplication.SharedApplication.StatusBarStyle = UIStatusBarStyle.LightContent;
 
             return base.FinishedLaunching(app, options);
         }

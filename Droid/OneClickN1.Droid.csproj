@@ -98,6 +98,7 @@
     <None Include="Properties\AndroidManifest.xml" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="packages.config" />
+    <None Include="Resources\FredokaOne-Regular.ttf" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Tabbar.axml" />
@@ -107,6 +108,12 @@
     <AndroidResource Include="Resources\drawable-hdpi\icon.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\icon.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\icon.png" />
+    <AndroidResource Include="Resources\drawable\Background.jpg" />
+    <AndroidResource Include="Resources\drawable\LogoN1.png" />
+    <AndroidResource Include="Resources\drawable\LogoN1button.png" />
+    <AndroidResource Include="Resources\drawable\LogoN1v2.png" />
+    <AndroidResource Include="Resources\drawable\N1Logo.png" />
+    <AndroidResource Include="Resources\drawable\telegramLogo.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\FredokaOne-Regular.ttf" />
