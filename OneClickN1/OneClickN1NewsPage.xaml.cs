@@ -10,6 +10,8 @@ namespace OneClickN1
         public OneClickN1NewsPage()
         {
             InitializeComponent();
-        }
+			NavigationPage.SetHasNavigationBar(this, false);
+
+		}
     }
 }

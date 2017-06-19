@@ -4,11 +4,14 @@ namespace OneClickN1
 {
     public partial class App : Application
     {
+        
         public App()
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage (new OneClickN1Page());
+
+            MainPage = new NavigationPage (new OneClickN1Page()){ BarTextColor=Color.White };
+
         }
 
         protected override void OnStart()

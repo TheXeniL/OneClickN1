@@ -5,7 +5,10 @@ namespace OneClickN1
 {
     public partial class OneClickN1Page : ContentPage
     {
-        public static string tagsToSearch;
+        private string tagsToSearch;
+        public static String[] tags = new String[] {}; 
+
+        public RequestJsonData parser = new RequestJsonData();
 
         public OneClickN1Page()
         {
@@ -18,9 +21,15 @@ namespace OneClickN1
             }
         }
 
-         public void SearchTagButtonPushed (object sender, EventArgs args){
-            Navigation.PushAsync(new OneClickN1NewsPage());
+        public async void SearchTagButtonPushed (object sender, EventArgs args)
+        {
+			//await parser.MakeGetRequest("https://newsn1.com/?mode=query&mask=" + tags[0]+"+"+tags[1]);
+			//testLabel.Text = (string)parser.jArray[0]["caption"]+" "+(string)parser.jArray[1]["caption"]+ " " + (string)parser.jArray[2]["caption"];
+            var newsPage = new OneClickN1NewsPage();
+            await Navigation.PushAsync(newsPage);
+
         }
+
 
         public void PlaceholderChangedText (object sender, EventArgs args){
             if (placeholderTags.Text == ""){
@@ -34,6 +43,7 @@ namespace OneClickN1
 
             }
             tagsToSearch = placeholderTags.Text;
+            tags = tagsToSearch.Split(' ');
         }
 
         public void N1NewsButton(object sender, EventArgs args){

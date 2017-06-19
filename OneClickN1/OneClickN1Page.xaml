@@ -38,7 +38,7 @@
                     <Button x:Name="searchTagButton" Text="ПОИСК" BackgroundColor="DarkBlue" FontAttributes="Bold"  HeightRequest="40" Clicked="SearchTagButtonPushed" />
                         </StackLayout>
                     <StackLayout>
-                    <Label Text="OneClick - сервис предоставляющий быстрый поиск новостей по интересующим Вас темам. Введите ключевые слова или предложения для нахождения соответствующих новостей." TextColor="White" FontSize="17" XAlign="Center" />
+                    <Label x:Name="testLabel" Text="OneClick - сервис предоставляющий быстрый поиск новостей по интересующим Вас темам. Введите ключевые слова или предложения для нахождения соответствующих новостей." TextColor="White" FontSize="17" XAlign="Center" />
                         </StackLayout>
                     <StackLayout Spacing="15" HorizontalOptions="CenterAndExpand" WidthRequest="200">
                     <Button Text="Перейти к newsN1" Image="N1Logo" TextColor="White" BackgroundColor="Transparent" BorderColor="White" BorderWidth="2" Clicked="N1NewsButton" />
