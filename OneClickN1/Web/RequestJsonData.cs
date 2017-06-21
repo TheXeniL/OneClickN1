@@ -25,7 +25,7 @@ namespace OneClickN1
                 using (StreamReader reader = new StreamReader(response.GetResponseStream()))
                 {
                     
-                    var content = reader.ReadToEnd();
+                    var content = reader.ReadLine();
                     jArray = Newtonsoft.Json.Linq.JArray.Parse(content);
                     return content;
                 }

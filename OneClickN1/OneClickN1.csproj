@@ -47,7 +47,7 @@
       <DependentUpon>OneClickN1NewsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Web\RequestJsonData.cs" />
-    <Compile Include="Objects\News.cs" />
+    <Compile Include="Model\News.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Net.Http.Formatting">
@@ -86,7 +86,8 @@
   <ItemGroup>
     <Folder Include="Resources\" />
     <Folder Include="Web\" />
-    <Folder Include="Objects\" />
+    <Folder Include="Model\" />
+    <Folder Include="ViewModel\" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\LogoN1button.png" />

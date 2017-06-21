@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using Xamarin.Forms;
 
 namespace OneClickN1
@@ -19,12 +19,11 @@ namespace OneClickN1
                 searchTagButton.BackgroundColor = Color.DarkBlue;
                 NavigationPage.SetHasNavigationBar(this, false);
             }
+
         }
 
         public async void SearchTagButtonPushed (object sender, EventArgs args)
-        {
-			//await parser.MakeGetRequest("https://newsn1.com/?mode=query&mask=" + tags[0]+"+"+tags[1]);
-			//testLabel.Text = (string)parser.jArray[0]["caption"]+" "+(string)parser.jArray[1]["caption"]+ " " + (string)parser.jArray[2]["caption"];
+        {   
             var newsPage = new OneClickN1NewsPage();
             await Navigation.PushAsync(newsPage);
 
