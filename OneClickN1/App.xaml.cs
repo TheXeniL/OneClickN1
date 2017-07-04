@@ -10,7 +10,7 @@ namespace OneClickN1
             InitializeComponent();
 
 
-            MainPage = new NavigationPage (new OneClickN1NewsPage()){ BarTextColor=Color.White };
+            MainPage = new NavigationPage (new OneClickN1Page()){ BarTextColor = Color.White };
 
         }
 

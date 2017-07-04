@@ -2215,11 +2215,14 @@ namespace OneClickN1.Droid
 			// aapt resource value: 0x7f0200a5
 			public const int N1Logo = 2130837669;
 			
-			// aapt resource value: 0x7f0200a7
-			public const int notification_template_icon_bg = 2130837671;
+			// aapt resource value: 0x7f0200a8
+			public const int notification_template_icon_bg = 2130837672;
 			
 			// aapt resource value: 0x7f0200a6
-			public const int telegramLogo = 2130837670;
+			public const int srch2 = 2130837670;
+			
+			// aapt resource value: 0x7f0200a7
+			public const int telegramLogo = 2130837671;
 			
 			static Drawable()
 			{

@@ -1,78 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="OneClickN1.OneClickN1NewsPage">
+<ContentPage x:Name="newsPage" IsBusy="{Binding Source={x:Reference newsPage}, Path=IsBusy}"  xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="OneClickN1.OneClickN1NewsPage">
 	<ContentPage.Content>
-        <AbsoluteLayout>
+        
+        <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 <Image x:Name="background" Source="Background.jpg" Aspect="AspectFill" AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 1.0"
                AbsoluteLayout.LayoutFlags="All" />
-        
+
+           
+           
         <StackLayout
             AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 1.0"
             AbsoluteLayout.LayoutFlags="All">
 
-                <Grid BackgroundColor="#f2f2f4">
+
+                <Grid BackgroundColor="Transparent" >
             <Grid.RowDefinitions>
-                <RowDefinition Height="48" />
+                <RowDefinition Height="65" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-                    <!-- The search bar -->
-            <Grid Grid.Row="0" Padding="0,0,0,1" BackgroundColor="#ceced0">
-                <Grid BackgroundColor="#ffffff">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="48" />
+
+                    <!-- Searh bar -->
+                     <Grid Grid.Row="0" Padding="0,20,0,1" BackgroundColor="Transparent" >
+                <Grid BackgroundColor="Transparent" >
+                            <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50" />
                         <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="48" />
+                        <ColumnDefinition Width="0" />
                     </Grid.ColumnDefinitions>
-                    <Label Text="" FontFamily="FontAwesome" FontSize="16" TextColor="#9d9d9f" HorizontalOptions="Center" VerticalOptions="Center" />
-                    <Entry HorizontalTextAlignment="Center" FontFamily="Ubuntu" FontSize="14" PlaceholderColor="#9d9d9f" Placeholder="Search for a smoothie or ingredient" Grid.Column="1" />
+                            <Image Source="LogoN1" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="70" HeightRequest="65"  />
+                            <Entry x:Name="newTagsToSeach" WidthRequest="350" HeightRequest="36" Completed="SearchAnotherTags" HorizontalTextAlignment="Center" FontFamily="Ubuntu" FontSize="16" Keyboard="Text" PlaceholderColor="#9d9d9f" Placeholder="Искать другие новости" HorizontalOptions="Center" VerticalOptions="Center"  Grid.Column="1"/>
                 </Grid>
             </Grid>
 
 
                     <!-- The List view -->
-            <ListView x:Name="newsList" Grid.Row="1" BackgroundColor="Transparent" SeparatorVisibility="None"  HasUnevenRows="true"  >
-
-                        <ListView.Header>
-                    <StackLayout Padding="0,16,0,14">
-                        <Label Text="- LOTS OF NEWS -" TextColor="#9c9c9e" FontFamily="Ubuntu" FontSize="14" HorizontalOptions="Center" />
-                    </StackLayout>
-                        </ListView.Header>
-                        
+            <ListView x:Name="newsList" Grid.Row="1" BackgroundColor="Transparent" SeparatorVisibility="None" HasUnevenRows="true" Refreshing="RefreshNews" ItemAppearing="LoadMoreNews" ItemTapped="ShowDetails" >
+        
                         <ListView.ItemTemplate>
                         <DataTemplate>
                         <ViewCell>
-                                     <Grid Padding="8,0,8,10" RowSpacing="0">
-                                <Grid Padding="1" BackgroundColor="#e1e1e3" RowSpacing="0">
+                                     <Grid Padding="8,0,8,10" RowSpacing="0" >
+                                    
+                                <Grid Padding="1" BackgroundColor="#e1e1e3" RowSpacing="0" >
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="192" />
                                         <RowDefinition Height="64" />
                                     </Grid.RowDefinitions>
-                                            <Grid Grid.Row="0" Padding="0" BackgroundColor="#e4e4e4">
-                                        <Image Source="{Binding imageURL}" />
+                                            <Grid Grid.Row="0" Padding="0" BackgroundColor="#184A65" >
+                                        <Image Source="{Binding imageURL}" Aspect="AspectFill" />
                                     </Grid>
                                     <Grid Grid.Row="1" BackgroundColor="#ffffff" RowSpacing="0">
-                                        <Grid Padding="15" RowSpacing="0">
+                                        <Grid Padding="10" RowSpacing="0">
                                             <Grid.RowDefinitions>
-                                                <RowDefinition Height="15" />
+                                                <RowDefinition Height="20" />
                                                 <RowDefinition Height="4" />
-                                                <RowDefinition Height="15" />
+                                                <RowDefinition Height="20" />
                                             </Grid.RowDefinitions>
-                                            <Label Grid.Row="0" Text="{Binding caption}" FontFamily="Ubuntu-Medium" FontSize="14" TextColor="#3c3947" />
-                                                    <Label Grid.Row="1" Text="{Binding overview}" FontFamily="Ubuntu-Medium" FontSize="12" TextColor="#9e9ea0" />
+                                                    <StackLayout Grid.Row="0" >
+                                                        <Label FormattedText="{Binding caption}" HorizontalOptions="Start" VerticalOptions="Start" FontFamily="Ubuntu-Medium" FontAttributes="Bold" FontSize="15" TextColor="#3c3947" />
+                                                    </StackLayout>
                                         </Grid>
                                     </Grid>
                                 </Grid>
                             </Grid>
-                                    
                                 </ViewCell>
                             </DataTemplate>
                         </ListView.ItemTemplate>
             </ListView>
-
-
-
                     </Grid> 
         </StackLayout>
+            <StackLayout Padding="12" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1">
+                <ActivityIndicator IsRunning="{Binding Source={x:Reference newsPage}, Path=IsBusy}" VerticalOptions="Center"  Color="White" HorizontalOptions="Center"  AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 1.0" />
+            </StackLayout>
                 </AbsoluteLayout>
 	</ContentPage.Content>
 </ContentPage>

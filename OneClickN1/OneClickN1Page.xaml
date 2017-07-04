@@ -35,7 +35,8 @@
                     
                     <StackLayout>
                     <Entry x:Name="placeholderTags" Placeholder="Введите ключевые слова" PlaceholderColor="Gray" HeightRequest="40" TextChanged="PlaceholderChangedText"  />
-                    <Button x:Name="searchTagButton" Text="ПОИСК" BackgroundColor="DarkBlue" FontAttributes="Bold"  HeightRequest="40" Clicked="SearchTagButtonPushed" />
+                        <Label x:Name="errorLabel" Text = "По данным тегам ничего не найдено" IsVisible="false" TextColor="Red"/>
+                        <Button x:Name="searchTagButton" Text="ПОИСК" BackgroundColor="DarkBlue" FontAttributes="Bold"  HeightRequest="40" Clicked="SearchTagButtonPushed" />
                         </StackLayout>
                     <StackLayout>
                     <Label x:Name="testLabel" Text="OneClick - сервис предоставляющий быстрый поиск новостей по интересующим Вас темам. Введите ключевые слова или предложения для нахождения соответствующих новостей." TextColor="White" FontSize="17" XAlign="Center" />

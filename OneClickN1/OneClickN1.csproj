@@ -34,6 +34,9 @@
     <EmbeddedResource Include="OneClickN1NewsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="OneClickN1NewsOverview.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -48,6 +51,9 @@
     </Compile>
     <Compile Include="Web\RequestJsonData.cs" />
     <Compile Include="Model\News.cs" />
+    <Compile Include="OneClickN1NewsOverview.xaml.cs">
+      <DependentUpon>OneClickN1NewsOverview.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Net.Http.Formatting">
@@ -94,6 +100,7 @@
     <BundleResource Include="Resources\telegramLogo.png" />
     <BundleResource Include="Resources\LogoN1v2.png" />
     <BundleResource Include="Resources\N1Logo.png" />
+    <BundleResource Include="Resources\srch2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />

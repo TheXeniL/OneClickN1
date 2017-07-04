@@ -9,30 +9,42 @@ namespace OneClickN1
     public class RequestJsonData
     {
         public Newtonsoft.Json.Linq.JArray jArray = new Newtonsoft.Json.Linq.JArray();
+        public bool JsonParseSucces;
+        public bool HttpConnectStatus;
 
-        public RequestJsonData()
-        {
 
-        }
 
         public async Task<string> MakeGetRequest(string url)
         {
             var request = WebRequest.Create(url);
 
-            HttpWebResponse response = await request.GetResponseAsync() as HttpWebResponse;
-            if (response.StatusCode == HttpStatusCode.OK)
+
+            try
             {
+                HttpWebResponse response = await request.GetResponseAsync() as HttpWebResponse;
                 using (StreamReader reader = new StreamReader(response.GetResponseStream()))
                 {
-                    
-                    var content = reader.ReadLine();
-                    jArray = Newtonsoft.Json.Linq.JArray.Parse(content);
-                    return content;
+					var content = reader.ReadLine();
+
+                    if (content == "false")
+                    {
+                        JsonParseSucces = false;
+                        return null;
+                    }
+
+                    else
+                    {
+                        JsonParseSucces = true;
+                        jArray = Newtonsoft.Json.Linq.JArray.Parse(content);
+                        return content;
+                    }
                 }
+
             }
-            else
+            catch(Exception e)
             {
-                return response.StatusCode.ToString();
+                HttpConnectStatus = false;
+                return null;
             }
         }
 

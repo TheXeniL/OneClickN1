@@ -11,6 +11,5 @@ namespace OneClickN1.Model
         public string id { get; set; }
         public string imageURL { get; set; }
 
-
     }
 }
