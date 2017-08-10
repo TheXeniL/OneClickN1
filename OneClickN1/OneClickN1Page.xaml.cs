@@ -16,6 +16,10 @@ namespace OneClickN1
             InitializeComponent();
 			NavigationPage.SetHasNavigationBar(this, false);
 
+            /* 
+             * При инициализации страницы кнопка не доступна так как в поле отсуствуют теги 
+            */
+
 			if(placeholderTags.Text == null){
                 searchTagButton.IsEnabled = false;
                 searchTagButton.BackgroundColor = Color.DarkBlue;
@@ -23,54 +27,82 @@ namespace OneClickN1
 
         }
 
-        public async void SearchTagButtonPushed (object sender, EventArgs args)
+       
+
+        /* 
+         * При нажатии на кнопку создаются теги для обработки, данные теги передаются парсеру и обрабатываются Json, 
+         * если запрос новостей прошел успешно то проиходит переход на следующую страницу с новостями, 
+         * если нет то появляется сообщение об ошибке и перехода не приосходит.
+        */
+
+        public async void SearchTagButtonPushed(object sender, EventArgs args)
         {
-			CreateTagsToSearch(tags);
-			await parser.MakeGetRequest("https://newsn1.com/?mode=query&mask=" + searchTags);
-            if (parser.JsonParseSucces == true){
-				var newsPage = new OneClickN1NewsPage();
-				await Navigation.PushAsync(newsPage);
-            } else {
-				errorLabel.IsVisible = true;
-				searchTagButton.IsEnabled = false;
-				searchTagButton.BackgroundColor = Color.DarkBlue;
-				searchTagButton.TextColor = Color.White;
-				
+            CreateTagsToSearch(tags);
+            await parser.MakeGetRequest("https://newsn1.com/?mode=query&mask=" + searchTags);
+
+            if (parser.JsonParseSucces == true)
+            {
+                var newsPage = new OneClickN1NewsPage();
+                await Navigation.PushAsync(newsPage);
+				parser.JsonParseSucces = true;
+			}
+            else
+            {
+                errorLabel.IsVisible = true;
+                searchTagButton.IsEnabled = false;
+                searchTagButton.BackgroundColor = Color.DarkBlue;
+                searchTagButton.TextColor = Color.White;
             }
-            parser.JsonParseSucces = true;
+
             searchTags = null;
 
         }
 
+        /* 
+         *  При изменении содержания поля для тегов, то есть при вводе самих тегов пользователем кнопка "Поиск новостей" изменяет состояние
+         *  на рабочее и не рабочее.
+         */
 
-        public void PlaceholderChangedText (object sender, EventArgs args){
-            if (placeholderTags.Text == ""){
-				searchTagButton.IsEnabled = false;
-				searchTagButton.BackgroundColor = Color.DarkBlue;
-				searchTagButton.TextColor = Color.White;
+        public void PlaceholderChangedText(object sender, EventArgs args)
+        {
+            if (placeholderTags.Text == "")
+            {
+                searchTagButton.IsEnabled = false;
+                searchTagButton.BackgroundColor = Color.DarkBlue;
+                searchTagButton.TextColor = Color.White;
                 errorLabel.IsVisible = false;
-                } else {
+            }
+
+            else
+            {
                 searchTagButton.IsEnabled = true;
-				searchTagButton.BackgroundColor = Color.Blue;
-				searchTagButton.TextColor = Color.White;
+                searchTagButton.BackgroundColor = Color.Blue;
+                searchTagButton.TextColor = Color.White;
                 errorLabel.IsVisible = false;
 
-            } 
-            tags = placeholderTags.Text.Split(' ');
-           
-		}
+            }
 
-        public void ErrorHandle(){
-            
+            tags = placeholderTags.Text.Split(' ');
+
         }
 
-        public void N1NewsButton(object sender, EventArgs args){
+        /*
+         * Методы для открытия сторонних URl на мобильном етелефоне
+         */
+
+        public void N1NewsButton(object sender, EventArgs args)
+        {
             Device.OpenUri(new Uri("https://newsn1.com/"));
         }
 
-        public void TelegramButton (object sender, EventArgs args){
+        public void TelegramButton (object sender, EventArgs args)
+        {
             Device.OpenUri(new Uri("https://telegram.me/OneClickNewsBot"));   
         }
+
+		/*
+		 * Метод позволяющий создавать тип данных string нужного формата (перечисление тегов через знак +) 
+		 */
 
 		private void CreateTagsToSearch(string[] tagsToSearchFor)
 		{

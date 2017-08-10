@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="OneClickN1.OneClickN1WebView">
+	<ContentPage.Content>
+        <AbsoluteLayout>
+<Image x:Name="background" Source="Background.jpg" Aspect="AspectFill" AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 1.0"
+               AbsoluteLayout.LayoutFlags="All" />
+        
+        <StackLayout
+            AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 1.0"
+            AbsoluteLayout.LayoutFlags="All">
+        <StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Back" HorizontalOptions="Start" Clicked="backButtonClicked" />
+                <Button Text="Forward" HorizontalOptions="EndAndExpand" />
+            </StackLayout>
+                <WebView x:Name="webView" HeightRequest="1000" WidthRequest="1000" />
+            </StackLayout>
+                </StackLayout>
+            </AbsoluteLayout>
+	</ContentPage.Content>
+</ContentPage>

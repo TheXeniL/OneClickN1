@@ -4,16 +4,24 @@ using Xamarin.Forms;
 using System.Collections.ObjectModel;
 using OneClickN1.Model;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Linq;
+using System.Diagnostics;
 
 namespace OneClickN1
 {
     public partial class OneClickN1NewsPage : ContentPage
     {
         public RequestJsonData parser = new RequestJsonData();
-        private ObservableCollection<News> news { get; set; }
+		public static string newsID;
+
+		private ObservableCollection<News> news { get; set; }
         private string[] tags = new string[] { };
         private string searchTags;
         private int offsetNumber;
+        private int globalNewsID = 0;
+        private bool loadMoreNewsStatus = false;
+        DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
 
 
         public OneClickN1NewsPage()
@@ -24,37 +32,79 @@ namespace OneClickN1
             newsList.IsPullToRefreshEnabled = true;
             newsList.ItemsSource = news;
             GetTaggedNews();
-
         }
 
-        private async void ShowDetails(object sender, ItemTappedEventArgs args){
-            //var newsPage = new OneClickN1NewsOverview();
-            //await Navigation.PushAsync(new OneClickN1NewsOverview());
+        private async void ShowDetails(object sender, Xamarin.Forms.ItemTappedEventArgs e)
+        {
+			var index = (newsList.ItemsSource as ObservableCollection<News>).IndexOf(e.Item as News);
+            Debug.WriteLine(index);
+
+            IEnumerable<News> getDataFromCollection = news.Where(c => c.loacalId == index);
+
+			foreach (var temp in getDataFromCollection)
+            {
+                newsID = temp.id;
+            }
+
+            var newsPage = new OneClickN1WebView(newsID);
+            await Navigation.PushAsync(newsPage);
         }
+
+		public void OnTapGestureRecognizerTapped(object sender, EventArgs args)
+		{
+            this.Navigation.PopAsync();
+		}
+
+
+        /*
+         * Данный метод позволяет на странице найденных новостей вводить другие теги для поиска новостей, не переходя на предыдущую страницу
+         */
 
         private async void SearchAnotherTags(object sender, EventArgs args)
         {
 			if (!this.IsBusy)
 			{
-
 				try
 				{
                     this.IsBusy = true;
-
+                    globalNewsID = 0;
                     searchTags = null;
                     tags = newTagsToSeach.Text.Split(' ');
                     CreateTagsToSearch(tags);
                     offsetNumber = 0;
                     await parser.MakeGetRequest("https://newsn1.com/?mode=query&mask=" + searchTags + "&offset=" + offsetNumber.ToString());
-                    news.Clear();
-                    FillNewsFromTags();
-                    newTagsToSeach.Text = null;
+					
+                    if (parser.JsonParseSucces == true)
+					{
+						news.Clear();
+						FillNewsFromTags();
+						newTagsToSeach.Text = null;
+					}
+					else
+					{
+						errorLabel.IsVisible = true;
+					}
+
                 }
                 finally
                 {
                     this.IsBusy = false;
                 }
             }
+		}
+
+		public void placeHolderTextChanged(object sender, EventArgs args)
+		{
+            if (newTagsToSeach.Text == "")
+			{
+				errorLabel.IsVisible = false;
+			}
+
+			else
+			{
+                errorLabel.IsVisible = false;
+			}
+
 		}
 
         private async void GetTaggedNews()
@@ -69,43 +119,54 @@ namespace OneClickN1
                     searchTags = OneClickN1Page.searchTags;
                     await parser.MakeGetRequest("https://newsn1.com/?mode=query&mask=" + searchTags + "&offset=" + offsetNumber.ToString());
                     FillNewsFromTags();
-                }finally{
+                }
+
+                finally
+                {
                     this.IsBusy = false;
                 }
             }
         
 		}
 
-        private void CreateTagsToSearch (string[] tagsToSearchFor){
-            for (int i = 0; i < tagsToSearchFor.Length;i++){
+        private void CreateTagsToSearch (string[] tagsToSearchFor)
+        {
+            for (int i = 0; i < tagsToSearchFor.Length;i++)
+            {
                 searchTags += tagsToSearchFor[i] + "+";
             }
         }
 
         private void FillNewsFromTags()
         {
+            
             for (int i = 0; i < parser.jArray.Count; i++)
-            {
-                news.Add(new News()
-                {
-                    caption = WebUtility.HtmlDecode(parser.jArray[i]["caption"].ToString()),
-                    id = parser.jArray[i]["id"].ToString(),
-                    overview = WebUtility.HtmlDecode(parser.jArray[i]["overview"].ToString()),
-                    imageURL = "https://newsn1.com/img/knews/" + parser.jArray[i]["picture"]
-
-                });
+            {		
+                    news.Add(new News()
+					{
+						loacalId = globalNewsID,
+						caption = WebUtility.HtmlDecode(parser.jArray[i]["caption"].ToString()),
+						id = parser.jArray[i]["id"].ToString(),
+						overview = WebUtility.HtmlDecode(parser.jArray[i]["overview"].ToString()),
+						imageURL = "https://newsn1.com/img/knews/" + parser.jArray[i]["picture"],
+						imageSource = "https://newsn1.com/img/knews/" + parser.jArray[i]["srcicon"],
+						newsSource = WebUtility.HtmlDecode(parser.jArray[i]["srcname"].ToString()),
+						newsTime = dtDateTime.AddSeconds((double)parser.jArray[i]["kntime"]).ToLocalTime().ToString("HH:mm dd, MMMM yyyy")
+					});
+               
+                globalNewsID++;
             }
         }
 
-
-
-        private async void RefreshNews(object sender, EventArgs args){
+        private async void RefreshNews(object sender, EventArgs args)
+        {
             if (!this.IsBusy)
             {
 
                 try
                 {
                     this.IsBusy = true;
+                    globalNewsID = 0;
                     offsetNumber = 0;
                     await parser.MakeGetRequest("https://newsn1.com/?mode=query&mask=" + searchTags + "&offset=" + offsetNumber.ToString());
                     news.Clear();
@@ -117,24 +178,30 @@ namespace OneClickN1
             }
 
 		}
+        protected void onBindingContextChanged(object sender, EventArgs args){
+            
+		}
 
-        private async void LoadMoreNews(object sender,ItemVisibilityEventArgs e) {
-            if (e.Item == news[news.Count-1])
-			{
-				await LoadItems();
-			}
-
+        private async void LoadMoreNews(object sender,ItemVisibilityEventArgs e) 
+        {
+            if (loadMoreNewsStatus == false)
+            {
+                if (e.Item == news[news.Count - 1])
+                {
+                    await LoadItems();
+                }
+            }
         }
 
         private async Task LoadItems()
         {
+            loadMoreNewsStatus = true;
             if (!this.IsBusy)
             {
 
                 try
                 {
                     this.IsBusy = true;
-
                     offsetNumber += 10;
                     await parser.MakeGetRequest("https://newsn1.com/?mode=query&mask=" + searchTags + "&offset=" + offsetNumber.ToString());
                     FillNewsFromTags();
@@ -144,10 +211,8 @@ namespace OneClickN1
                     this.IsBusy = false;
                 }
             }
+            await Task.Delay(500);
+            loadMoreNewsStatus = false;
         }
-       
-
-
-
     }
 }
