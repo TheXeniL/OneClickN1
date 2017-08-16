@@ -14,37 +14,34 @@
 
                 <Grid BackgroundColor="Transparent" >
             <Grid.RowDefinitions>
-                <RowDefinition Height="93" />
+                <RowDefinition x:Name="errorLabelHeight" Height="55" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
 
                     <!-- Searh bar -->
-                     <Grid Grid.Row="0"  Padding="0,20,0,1" BackgroundColor="Transparent" HeightRequest="90"  >
+                     <Grid Grid.Row="0"  Padding="0,14,0,1" BackgroundColor="Transparent" HeightRequest="90"  >
                 <Grid BackgroundColor="Transparent" >
 
                             <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="50" />
+                        <ColumnDefinition Width="45" />
                         <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="0" />
 
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                     <RowDefinition Height="50"/>
-                                <RowDefinition x:Name="errorLabelExtend" Height="0" />
+                                <RowDefinition x:Name="errorLabelExtend" Height="50" />
                             </Grid.RowDefinitions>
                             <Image Source="LogoN1" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="70" HeightRequest="65" Grid.Row="0"  >
                                   <Image.GestureRecognizers>
-        <TapGestureRecognizer
-                Tapped="OnTapGestureRecognizerTapped"
-                />
+        <TapGestureRecognizer Tapped="OnTapGestureRecognizerTapped"/>
   </Image.GestureRecognizers>
                                 </Image>
                             <Entry x:Name="newTagsToSeach" WidthRequest="350" HeightRequest="36" Completed="SearchAnotherTags" HorizontalTextAlignment="Center" FontFamily="Ubuntu" FontSize="16" Keyboard="Text" PlaceholderColor="#9d9d9f" Placeholder="Искать другие новости" HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="0"  Grid.Column="1" TextChanged="placeHolderTextChanged"/>
-                            <Label x:Name="errorLabel" Grid.Column="1" Grid.Row="1" Text = "По данным тегам ничего не найдено" Grid.RowSpan="1" Grid.ColumnSpan="2" IsVisible="true" TextColor="Red"/>
+                            <Label x:Name="errorLabel" Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="1" HorizontalTextAlignment="Center" Text = "По данным ключевым словам ничего не найдено" IsVisible="false"  TextColor="Red"/>
 
                 </Grid>
-                        
             </Grid>
   
                     <!-- The List view -->
@@ -52,12 +49,12 @@
                         <ListView.ItemTemplate>
                         <DataTemplate>
                         <ViewCell x:Name="viewCell">
-                                     <Grid Padding="8,0,8,1" RowSpacing="0" >
-                                <Grid x:Name="gridRowDefinition" Padding="1" BackgroundColor="Transparent" RowSpacing="0" >
+                                     <Grid x:Name="gridRowDefinition" Padding="6,8,6,1" RowSpacing="0" >
+                                <Grid  Padding="1" BackgroundColor="Transparent" RowSpacing="0" >
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="50" />
-                                        <RowDefinition Height="192" />
-                                                <RowDefinition Height ="70" />
+                                        <RowDefinition  Height="192" />
+                                                <RowDefinition Height ="100" />
                                     </Grid.RowDefinitions>
                                             <Grid Grid.Row="0" BackgroundColor="#ffffff" >
                                                  <StackLayout Orientation="Horizontal">
@@ -66,11 +63,8 @@
                                                 <Label Text="{Binding newsTime}" Margin="5" FontSize="12" FontFamily="rr" TextColor="Black" HorizontalOptions="EndAndExpand" VerticalOptions="Center" />
                                                     </StackLayout>
                                             </Grid>
-                                            <Grid x:Name="imageGrid" Grid.Row="1" Padding="0" BackgroundColor="#184A65"  >
-                                                    <ffimageloading:CachedImage x:Name="imageNewsUrl" Source="{Binding imageURL}" Aspect="AspectFill"  DownsampleToViewSize="true" />
-                                                    <!--<Label Text="{Binding newsSource}" Margin="15" TextColor="White"  HorizontalOptions="CenterAndExpand" />
-                                                <Label Text="{Binding newsTime}" Margin="15" TextColor="White" HorizontalOptions="EndAndExpand" />
-                                                <Image Source="{Binding imageSource}" Margin="5" Aspect="AspectFill"  VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand" WidthRequest="40" HeightRequest="40" />-->
+                                            <Grid x:Name="imageGrid" Grid.Row="1" Padding="0" BackgroundColor="White"  >
+                                                    <ffimageloading:CachedImage x:Name="imageNewsUrl" Source="{Binding imageURL}" LoadingPlaceholder="" Aspect="AspectFill" DownsampleToViewSize="true"  />
                                             </Grid>
                                     <Grid Grid.Row="2" BackgroundColor="#ffffff" RowSpacing="0">
                                         <Grid Padding="10" RowSpacing="0">

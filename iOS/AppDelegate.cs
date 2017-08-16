@@ -17,7 +17,6 @@ namespace OneClickN1.iOS
         {
             global::Xamarin.Forms.Forms.Init();
 			CachedImageRenderer.Init();
-            //ImageCircleRenderer.Init();
             ImageCircleRenderer.Init();
 
 			LoadApplication(new App());

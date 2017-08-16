@@ -35,7 +35,7 @@
                     
                     <StackLayout>
                     <Entry x:Name="placeholderTags" Placeholder="Введите ключевые слова" PlaceholderColor="Gray" HeightRequest="40" TextChanged="PlaceholderChangedText"  />
-                        <Label x:Name="errorLabel" Text = "По данным тегам ничего не найдено" IsVisible="false" TextColor="Red"/>
+                        <Label x:Name="errorLabel" Text = "По данным ключевым словам ничего не найдено" IsVisible="false" HorizontalTextAlignment="Center" TextColor="Red"/>
                         <Button x:Name="searchTagButton" Text="ПОИСК" BackgroundColor="DarkBlue" FontAttributes="Bold"  HeightRequest="40" Clicked="SearchTagButtonPushed" />
                         </StackLayout>
                     <StackLayout>

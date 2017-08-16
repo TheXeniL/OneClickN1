@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 using Xamarin.Forms;
 
@@ -12,6 +13,7 @@ namespace OneClickN1
             InitializeComponent();
 			NavigationPage.SetHasNavigationBar(this, false);
             webView.Source = "https://newsn1.com/post_" + newsID;
+            Debug.WriteLine("https://newsn1.com/post_" + newsID);
 		}
 
 

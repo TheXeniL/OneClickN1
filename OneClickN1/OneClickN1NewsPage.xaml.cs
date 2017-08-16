@@ -23,7 +23,6 @@ namespace OneClickN1
         private bool loadMoreNewsStatus = false;
         DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
 
-
         public OneClickN1NewsPage()
         {
             news = new ObservableCollection<News>();
@@ -32,7 +31,8 @@ namespace OneClickN1
             newsList.IsPullToRefreshEnabled = true;
             newsList.ItemsSource = news;
             GetTaggedNews();
-        }
+
+		}
 
         private async void ShowDetails(object sender, Xamarin.Forms.ItemTappedEventArgs e)
         {
@@ -79,10 +79,12 @@ namespace OneClickN1
 						news.Clear();
 						FillNewsFromTags();
 						newTagsToSeach.Text = null;
+                        errorLabelHeight.Height = 55;
 					}
 					else
 					{
 						errorLabel.IsVisible = true;
+                        errorLabelHeight.Height = 105;
 					}
 
                 }
@@ -98,11 +100,13 @@ namespace OneClickN1
             if (newTagsToSeach.Text == "")
 			{
 				errorLabel.IsVisible = false;
+				errorLabelHeight.Height = 55;
 			}
 
 			else
 			{
                 errorLabel.IsVisible = false;
+				errorLabelHeight.Height = 55;
 			}
 
 		}
@@ -118,7 +122,8 @@ namespace OneClickN1
                     offsetNumber = 0;
                     searchTags = OneClickN1Page.searchTags;
                     await parser.MakeGetRequest("https://newsn1.com/?mode=query&mask=" + searchTags + "&offset=" + offsetNumber.ToString());
-                    FillNewsFromTags();
+					FillNewsFromTags();
+					newsList.EndRefresh();
                 }
 
                 finally
@@ -126,7 +131,6 @@ namespace OneClickN1
                     this.IsBusy = false;
                 }
             }
-        
 		}
 
         private void CreateTagsToSearch (string[] tagsToSearchFor)
@@ -137,32 +141,51 @@ namespace OneClickN1
             }
         }
 
-        private void FillNewsFromTags()
+        private void  FillNewsFromTags()
         {
-            
-            for (int i = 0; i < parser.jArray.Count; i++)
-            {		
+           
+                for (int i = 0; i < parser.jArray.Count; i++)
+                {
                     news.Add(new News()
-					{
-						loacalId = globalNewsID,
-						caption = WebUtility.HtmlDecode(parser.jArray[i]["caption"].ToString()),
-						id = parser.jArray[i]["id"].ToString(),
-						overview = WebUtility.HtmlDecode(parser.jArray[i]["overview"].ToString()),
-						imageURL = "https://newsn1.com/img/knews/" + parser.jArray[i]["picture"],
-						imageSource = "https://newsn1.com/img/knews/" + parser.jArray[i]["srcicon"],
-						newsSource = WebUtility.HtmlDecode(parser.jArray[i]["srcname"].ToString()),
-						newsTime = dtDateTime.AddSeconds((double)parser.jArray[i]["kntime"]).ToLocalTime().ToString("HH:mm dd, MMMM yyyy")
-					});
-               
-                globalNewsID++;
-            }
+                    {
+                        loacalId = globalNewsID,
+                        caption = WebUtility.HtmlDecode(parser.jArray[i]["caption"].ToString()),
+                        id = parser.jArray[i]["id"].ToString(),
+                        overview = WebUtility.HtmlDecode(parser.jArray[i]["overview"].ToString()),
+                        imageURL = "https://newsn1.com/img/knews/" + parser.jArray[i]["picture"],
+                        imageSource = "https://newsn1.com/img/knews/" + parser.jArray[i]["srcicon"],
+                        newsSource = WebUtility.HtmlDecode(parser.jArray[i]["srcname"].ToString()),
+                        newsTime = dtDateTime.AddSeconds((double)parser.jArray[i]["kntime"]).ToLocalTime().ToString("HH:mm  dd, MMMM yyyy")
+                    });
+                    globalNewsID++;
+                }
+				changeImage();
+		}
+
+
+        private void changeImage(){
+            
+			for (int i = 0; i < parser.jArray.Count; i++)
+			{
+				var item = news.FirstOrDefault(p => p.loacalId == i);
+				Debug.WriteLine(item.loacalId);
+
+				if (item.imageURL == "https://newsn1.com/img/knews/")
+				{
+					Debug.WriteLine("Empty image");
+				}
+				else
+				{
+					Debug.WriteLine("Image filled");
+
+				}
+			}
         }
 
         private async void RefreshNews(object sender, EventArgs args)
         {
             if (!this.IsBusy)
             {
-
                 try
                 {
                     this.IsBusy = true;
@@ -174,17 +197,17 @@ namespace OneClickN1
                     newsList.EndRefresh();
                 } finally {
                     this.IsBusy = false;
-                }
+					errorLabelHeight.Height = 55;
+				}
             }
 
-		}
-        protected void onBindingContextChanged(object sender, EventArgs args){
-            
 		}
 
         private async void LoadMoreNews(object sender,ItemVisibilityEventArgs e) 
         {
-            if (loadMoreNewsStatus == false)
+			errorLabelHeight.Height = 55;
+
+			if (loadMoreNewsStatus == false)
             {
                 if (e.Item == news[news.Count - 1])
                 {

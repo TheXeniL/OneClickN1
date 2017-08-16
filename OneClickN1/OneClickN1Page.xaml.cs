@@ -27,7 +27,6 @@ namespace OneClickN1
 
         }
 
-       
 
         /* 
          * При нажатии на кнопку создаются теги для обработки, данные теги передаются парсеру и обрабатываются Json, 
@@ -45,6 +44,7 @@ namespace OneClickN1
                 var newsPage = new OneClickN1NewsPage();
                 await Navigation.PushAsync(newsPage);
 				parser.JsonParseSucces = true;
+                placeholderTags.Text = "";
 			}
             else
             {

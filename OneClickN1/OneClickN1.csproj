@@ -106,6 +106,7 @@
     <None Include="packages.config" />
     <None Include="Resources\FredokaOne-Regular.ttf" />
     <None Include="Resources\LogoN1.png" />
+    <None Include="Resources\loader_construction.svg" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
@@ -119,6 +120,7 @@
     <BundleResource Include="Resources\LogoN1v2.png" />
     <BundleResource Include="Resources\N1Logo.png" />
     <BundleResource Include="Resources\srch2.png" />
+    <BundleResource Include="Resources\giphy.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
