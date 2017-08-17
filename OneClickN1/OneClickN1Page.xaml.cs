@@ -22,7 +22,6 @@ namespace OneClickN1
 
 			if(placeholderTags.Text == null){
                 searchTagButton.IsEnabled = false;
-                searchTagButton.BackgroundColor = Color.DarkBlue;
             }
 
         }
@@ -37,7 +36,7 @@ namespace OneClickN1
         public async void SearchTagButtonPushed(object sender, EventArgs args)
         {
             CreateTagsToSearch(tags);
-            await parser.MakeGetRequest("https://newsn1.com/?mode=query&mask=" + searchTags);
+            await parser.MakeGetRequest("https://newsn1.com/?mode=query&mask=" + searchTags+"&fillpic=1");
 
             if (parser.JsonParseSucces == true)
             {
@@ -50,7 +49,6 @@ namespace OneClickN1
             {
                 errorLabel.IsVisible = true;
                 searchTagButton.IsEnabled = false;
-                searchTagButton.BackgroundColor = Color.DarkBlue;
                 searchTagButton.TextColor = Color.White;
             }
 
@@ -68,7 +66,6 @@ namespace OneClickN1
             if (placeholderTags.Text == "")
             {
                 searchTagButton.IsEnabled = false;
-                searchTagButton.BackgroundColor = Color.DarkBlue;
                 searchTagButton.TextColor = Color.White;
                 errorLabel.IsVisible = false;
             }
@@ -76,7 +73,6 @@ namespace OneClickN1
             else
             {
                 searchTagButton.IsEnabled = true;
-                searchTagButton.BackgroundColor = Color.Blue;
                 searchTagButton.TextColor = Color.White;
                 errorLabel.IsVisible = false;
 

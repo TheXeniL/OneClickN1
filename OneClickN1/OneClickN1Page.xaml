@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:OneClickN1" x:Class="OneClickN1.OneClickN1Page">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:img="clr-namespace:ImageButton.Abstractions;assembly=ImageButton.Abstractions" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:OneClickN1" x:Class="OneClickN1.OneClickN1Page">
 <AbsoluteLayout>
 <Image x:Name="background" Source="Background.jpg" Aspect="AspectFill" AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 1.0"
                AbsoluteLayout.LayoutFlags="All" />
@@ -36,8 +36,11 @@
                     <StackLayout>
                     <Entry x:Name="placeholderTags" Placeholder="Введите ключевые слова" PlaceholderColor="Gray" HeightRequest="40" TextChanged="PlaceholderChangedText"  />
                         <Label x:Name="errorLabel" Text = "По данным ключевым словам ничего не найдено" IsVisible="false" HorizontalTextAlignment="Center" TextColor="Red"/>
-                        <Button x:Name="searchTagButton" Text="ПОИСК" BackgroundColor="DarkBlue" FontAttributes="Bold"  HeightRequest="40" Clicked="SearchTagButtonPushed" />
-                        </StackLayout>
+                        <Grid>
+                            <Image Source="back_btn_one" />
+                            <Button Grid.Row="0" x:Name="searchTagButton" BackgroundColor="Transparent" Text="ПОИСК" FontAttributes="Bold"  HeightRequest="40" Clicked="SearchTagButtonPushed" />
+                        </Grid>
+                    </StackLayout>
                     <StackLayout>
                     <Label x:Name="testLabel" Text="OneClick - сервис предоставляющий быстрый поиск новостей по интересующим Вас темам. Введите ключевые слова или предложения для нахождения соответствующих новостей." TextColor="White" FontSize="15" XAlign="Center" />
                         </StackLayout>

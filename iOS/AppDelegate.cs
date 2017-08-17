@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using FFImageLoading.Forms.Touch;
-using ImageCircle.Forms.Plugin.Abstractions;
 using Foundation;
 using UIKit;
 using ImageCircle.Forms.Plugin.iOS;
+using ImageButton.iOS;
+
 
 namespace OneClickN1.iOS
 {
@@ -18,6 +19,8 @@ namespace OneClickN1.iOS
             global::Xamarin.Forms.Forms.Init();
 			CachedImageRenderer.Init();
             ImageCircleRenderer.Init();
+			ImageButtonRenderer.Init();
+
 
 			LoadApplication(new App());
 

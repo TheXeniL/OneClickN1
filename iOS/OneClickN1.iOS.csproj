@@ -116,6 +116,12 @@
     <Reference Include="ImageCircle.Forms.Plugin.iOS">
       <HintPath>..\packages\Xam.Plugins.Forms.ImageCircle.1.8.1\lib\Xamarin.iOS10\ImageCircle.Forms.Plugin.iOS.dll</HintPath>
     </Reference>
+    <Reference Include="ImageButton.Abstractions">
+      <HintPath>..\packages\Xam.Plugin.ImageButton.2.1.1\lib\Xamarin.iOS10\ImageButton.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageButton.iOS">
+      <HintPath>..\packages\Xam.Plugin.ImageButton.2.1.1\lib\Xamarin.iOS10\ImageButton.iOS.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OneClickN1\OneClickN1.csproj">
@@ -141,6 +147,7 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="MultiLineLabelRendererIOS.cs" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\FredokaOne-Regular.ttf" />
@@ -153,6 +160,9 @@
     <BundleResource Include="Resources\srch2.png" />
     <BundleResource Include="Resources\loader_construction.svg" />
     <BundleResource Include="Resources\giphy.gif" />
+    <BundleResource Include="Resources\_backfake.jpg" />
+    <BundleResource Include="Resources\back_btn_one.png" />
+    <BundleResource Include="Resources\backwhite192.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />

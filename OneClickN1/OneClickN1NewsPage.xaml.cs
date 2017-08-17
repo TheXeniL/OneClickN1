@@ -55,7 +55,6 @@ namespace OneClickN1
             this.Navigation.PopAsync();
 		}
 
-
         /*
          * Данный метод позволяет на странице найденных новостей вводить другие теги для поиска новостей, не переходя на предыдущую страницу
          */
@@ -72,7 +71,7 @@ namespace OneClickN1
                     tags = newTagsToSeach.Text.Split(' ');
                     CreateTagsToSearch(tags);
                     offsetNumber = 0;
-                    await parser.MakeGetRequest("https://newsn1.com/?mode=query&mask=" + searchTags + "&offset=" + offsetNumber.ToString());
+                    await parser.MakeGetRequest("https://newsn1.com/?mode=query&mask=" + searchTags + "&offset=" + offsetNumber.ToString()+"&fillpic=1");
 					
                     if (parser.JsonParseSucces == true)
 					{
@@ -121,7 +120,7 @@ namespace OneClickN1
                     this.IsBusy = true;
                     offsetNumber = 0;
                     searchTags = OneClickN1Page.searchTags;
-                    await parser.MakeGetRequest("https://newsn1.com/?mode=query&mask=" + searchTags + "&offset=" + offsetNumber.ToString());
+                    await parser.MakeGetRequest("https://newsn1.com/?mode=query&mask=" + searchTags + "&offset=" + offsetNumber.ToString()+"&fillpic=1");
 					FillNewsFromTags();
 					newsList.EndRefresh();
                 }
@@ -173,7 +172,7 @@ namespace OneClickN1
 				if (item.imageURL == "https://newsn1.com/img/knews/")
 				{
 					Debug.WriteLine("Empty image");
-				}
+                }
 				else
 				{
 					Debug.WriteLine("Image filled");
@@ -191,7 +190,7 @@ namespace OneClickN1
                     this.IsBusy = true;
                     globalNewsID = 0;
                     offsetNumber = 0;
-                    await parser.MakeGetRequest("https://newsn1.com/?mode=query&mask=" + searchTags + "&offset=" + offsetNumber.ToString());
+                    await parser.MakeGetRequest("https://newsn1.com/?mode=query&mask=" + searchTags + "&offset=" + offsetNumber.ToString()+"&fillpic=1");
                     news.Clear();
                     FillNewsFromTags();
                     newsList.EndRefresh();
@@ -226,7 +225,7 @@ namespace OneClickN1
                 {
                     this.IsBusy = true;
                     offsetNumber += 10;
-                    await parser.MakeGetRequest("https://newsn1.com/?mode=query&mask=" + searchTags + "&offset=" + offsetNumber.ToString());
+                    await parser.MakeGetRequest("https://newsn1.com/?mode=query&mask=" + searchTags + "&offset=" + offsetNumber.ToString()+"&fillpic=1");
                     FillNewsFromTags();
                 }
                 finally
