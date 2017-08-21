@@ -35,7 +35,11 @@ namespace OneClickN1
 
         public async void SearchTagButtonPushed(object sender, EventArgs args)
         {
+            IsBusy = true;
             CreateTagsToSearch(tags);
+            searchTagButton.IsEnabled = false;
+            imageButton.Source = "back_btn_ina";
+
             await parser.MakeGetRequest("https://newsn1.com/?mode=query&mask=" + searchTags+"&fillpic=1");
 
             if (parser.JsonParseSucces == true)
@@ -53,8 +57,9 @@ namespace OneClickN1
             }
 
             searchTags = null;
+			IsBusy = false;
 
-        }
+		}
 
         /* 
          *  При изменении содержания поля для тегов, то есть при вводе самих тегов пользователем кнопка "Поиск новостей" изменяет состояние
@@ -65,6 +70,7 @@ namespace OneClickN1
         {
             if (placeholderTags.Text == "")
             {
+                imageButton.Source = "back_btn_ina";
                 searchTagButton.IsEnabled = false;
                 searchTagButton.TextColor = Color.White;
                 errorLabel.IsVisible = false;
@@ -72,6 +78,7 @@ namespace OneClickN1
 
             else
             {
+                imageButton.Source = "back_btn_one";
                 searchTagButton.IsEnabled = true;
                 searchTagButton.TextColor = Color.White;
                 errorLabel.IsVisible = false;

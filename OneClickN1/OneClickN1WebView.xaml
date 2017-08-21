@@ -9,8 +9,8 @@
             AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 1.0"
             AbsoluteLayout.LayoutFlags="All">
         <StackLayout>
-            <StackLayout Orientation="Horizontal" Padding="10,9,0,0" >
-                <Button Text="&lt; Назад" FontSize="16" TextColor="White" HorizontalOptions="Start" Clicked="backButtonClicked" />
+            <StackLayout Orientation="Horizontal" Padding="10,10,0,0" >
+                <Button Text="&lt; К новостям" FontSize="18" TextColor="White" HorizontalOptions="Start" Clicked="backButtonClicked" />
             </StackLayout>
                 <WebView x:Name="webView" HeightRequest="1000" WidthRequest="1000" />
             </StackLayout>

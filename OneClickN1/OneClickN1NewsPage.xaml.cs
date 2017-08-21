@@ -36,8 +36,8 @@ namespace OneClickN1
 
         private async void ShowDetails(object sender, Xamarin.Forms.ItemTappedEventArgs e)
         {
+            this.IsBusy = true;
 			var index = (newsList.ItemsSource as ObservableCollection<News>).IndexOf(e.Item as News);
-            Debug.WriteLine(index);
 
             IEnumerable<News> getDataFromCollection = news.Where(c => c.loacalId == index);
 
@@ -45,7 +45,7 @@ namespace OneClickN1
             {
                 newsID = temp.id;
             }
-
+            this.IsBusy = false;
             var newsPage = new OneClickN1WebView(newsID);
             await Navigation.PushAsync(newsPage);
         }
@@ -76,7 +76,7 @@ namespace OneClickN1
                     if (parser.JsonParseSucces == true)
 					{
 						news.Clear();
-						FillNewsFromTags();
+						LoadDataAsync();
 						newTagsToSeach.Text = null;
                         errorLabelHeight.Height = 55;
 					}
@@ -121,7 +121,7 @@ namespace OneClickN1
                     offsetNumber = 0;
                     searchTags = OneClickN1Page.searchTags;
                     await parser.MakeGetRequest("https://newsn1.com/?mode=query&mask=" + searchTags + "&offset=" + offsetNumber.ToString()+"&fillpic=1");
-					FillNewsFromTags();
+                    LoadDataAsync();
 					newsList.EndRefresh();
                 }
 
@@ -140,45 +140,28 @@ namespace OneClickN1
             }
         }
 
-        private void  FillNewsFromTags()
+        public async Task FillNewsFromTags()
         {
-           
-                for (int i = 0; i < parser.jArray.Count; i++)
+
+            for (int i = 0; i < parser.jArray.Count; i++)
+            {
+                news.Add(new News()
                 {
-                    news.Add(new News()
-                    {
-                        loacalId = globalNewsID,
-                        caption = WebUtility.HtmlDecode(parser.jArray[i]["caption"].ToString()),
-                        id = parser.jArray[i]["id"].ToString(),
-                        overview = WebUtility.HtmlDecode(parser.jArray[i]["overview"].ToString()),
-                        imageURL = "https://newsn1.com/img/knews/" + parser.jArray[i]["picture"],
-                        imageSource = "https://newsn1.com/img/knews/" + parser.jArray[i]["srcicon"],
-                        newsSource = WebUtility.HtmlDecode(parser.jArray[i]["srcname"].ToString()),
-                        newsTime = dtDateTime.AddSeconds((double)parser.jArray[i]["kntime"]).ToLocalTime().ToString("HH:mm  dd, MMMM yyyy")
-                    });
-                    globalNewsID++;
-                }
-				changeImage();
+                    loacalId = globalNewsID,
+                    caption = WebUtility.HtmlDecode(parser.jArray[i]["caption"].ToString()),
+                    id = parser.jArray[i]["id"].ToString(),
+                    overview = WebUtility.HtmlDecode(parser.jArray[i]["overview"].ToString()),
+                    imageURL = "https://newsn1.com/img/knews/" + parser.jArray[i]["picture"],
+                    imageSource = "https://newsn1.com/img/knews/" + parser.jArray[i]["srcicon"],
+                    newsSource = WebUtility.HtmlDecode(parser.jArray[i]["srcname"].ToString()),
+                    newsTime = dtDateTime.AddSeconds((double)parser.jArray[i]["kntime"]).ToLocalTime().ToString("HH:mm  dd, MMMM yyyy")
+                });
+                globalNewsID++;
+            }
 		}
 
-
-        private void changeImage(){
-            
-			for (int i = 0; i < parser.jArray.Count; i++)
-			{
-				var item = news.FirstOrDefault(p => p.loacalId == i);
-				Debug.WriteLine(item.loacalId);
-
-				if (item.imageURL == "https://newsn1.com/img/knews/")
-				{
-					Debug.WriteLine("Empty image");
-                }
-				else
-				{
-					Debug.WriteLine("Image filled");
-
-				}
-			}
+        public async Task LoadDataAsync(){
+            await FillNewsFromTags();
         }
 
         private async void RefreshNews(object sender, EventArgs args)
@@ -192,7 +175,7 @@ namespace OneClickN1
                     offsetNumber = 0;
                     await parser.MakeGetRequest("https://newsn1.com/?mode=query&mask=" + searchTags + "&offset=" + offsetNumber.ToString()+"&fillpic=1");
                     news.Clear();
-                    FillNewsFromTags();
+                    LoadDataAsync();
                     newsList.EndRefresh();
                 } finally {
                     this.IsBusy = false;
@@ -226,7 +209,7 @@ namespace OneClickN1
                     this.IsBusy = true;
                     offsetNumber += 10;
                     await parser.MakeGetRequest("https://newsn1.com/?mode=query&mask=" + searchTags + "&offset=" + offsetNumber.ToString()+"&fillpic=1");
-                    FillNewsFromTags();
+                    LoadDataAsync();
                 }
                 finally
                 {

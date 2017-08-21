@@ -17,8 +17,7 @@
                 <RowDefinition x:Name="errorLabelHeight" Height="55" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-
-
+                    
                     <!-- Searh bar -->
                      <Grid Grid.Row="0"  Padding="0,14,0,1" BackgroundColor="Transparent" HeightRequest="90"  >
                 <Grid BackgroundColor="Transparent" >
@@ -45,7 +44,7 @@
             </Grid>
   
                     <!-- The List view -->
-            <ListView x:Name="newsList" Grid.Row="1" BackgroundColor="Transparent" SeparatorVisibility="None" HasUnevenRows="true" Refreshing="RefreshNews" ItemAppearing="LoadMoreNews" ItemTapped="ShowDetails" >
+            <ListView x:Name="newsList" Grid.Row="1" CachingStrategy="RetainElement" BackgroundColor="Transparent" SeparatorVisibility="None" HasUnevenRows="true" Refreshing="RefreshNews" ItemAppearing="LoadMoreNews" ItemTapped="ShowDetails" >
                         <ListView.ItemTemplate>
                         <DataTemplate>
                         <ViewCell x:Name="viewCell">
@@ -64,7 +63,7 @@
                                                     </StackLayout>
                                             </Grid>
                                             <Grid x:Name="imageGrid" Grid.Row="1" Padding="0" BackgroundColor="White"  >
-                                                    <ffimageloading:CachedImage x:Name="imageNewsUrl" Source="{Binding imageURL}" LoadingPlaceholder="backwhite192" Aspect="AspectFill" />
+                                                    <ffimageloading:CachedImage x:Name="imageNewsUrl" CacheDuration="-1" Source="{Binding imageURL}" LoadingPlaceholder="backwhite250" Aspect="AspectFill" />
                                             </Grid>
                                     <Grid Grid.Row="2" BackgroundColor="#ffffff" RowSpacing="0">
                                         <Grid Padding="10" RowSpacing="0">
