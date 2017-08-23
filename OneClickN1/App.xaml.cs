@@ -1,4 +1,6 @@
-﻿using Xamarin.Forms;
+﻿using System.Reflection;
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace OneClickN1
 {
@@ -8,9 +10,14 @@ namespace OneClickN1
         public App()
         {
             InitializeComponent();
-
-
             MainPage = new NavigationPage (new OneClickN1Page()){ BarTextColor = Color.White };
+
+			if (Device.OS == TargetPlatform.iOS || Device.OS == TargetPlatform.Android)
+			{
+				var ci = DependencyService.Get<ILocalize>().GetCurrentCultureInfo();
+                AppResources.AppResources.Culture = ci; // set the RESX for resource localization
+				DependencyService.Get<ILocalize>().SetLocale(ci); // set the Thread for locale-aware methods
+			}
 
         }
 

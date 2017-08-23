@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -36,6 +35,10 @@
     <EmbeddedResource Include="OneClickN1WebView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="AppResources\AppResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -54,6 +57,11 @@
       <DependentUpon>OneClickN1WebView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MultiLineLabel.cs" />
+    <Compile Include="TranslateExtension.cs" />
+    <Compile Include="ILocalize.cs" />
+    <Compile Include="AppResources\AppResources.Designer.cs">
+      <DependentUpon>AppResources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Net.Http.Extensions">
@@ -96,7 +104,7 @@
     <Folder Include="Web\" />
     <Folder Include="Model\" />
     <Folder Include="ViewModel\" />
-    <Folder Include="CustomRenderers\" />
+    <Folder Include="AppResources\" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\telegramLogo.png" />
@@ -108,6 +116,7 @@
     <BundleResource Include="Resources\Background.jpg" />
     <BundleResource Include="Resources\back_btn_ina.png" />
     <BundleResource Include="Resources\LogoN1.png" />
+    <BundleResource Include="Resources\loading.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />

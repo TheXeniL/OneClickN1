@@ -5,6 +5,7 @@ namespace OneClickN1
 {
     public class MultiLineLabel: Label
     {
-		public int Lines = 2;
+        public int Lines = 2;            
+
     }
 }

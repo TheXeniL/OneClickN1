@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ContentPage x:Name="newsPage" xmlns="http://xamarin.com/schemas/2014/forms" IsBusy="{Binding Source={x:Reference newsPage}, Path=IsBusy}" xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" xmlns:img="clr-namespace:ImageButton.Abstractions;assembly=ImageButton.Abstractions" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:OneClickN1" x:Class="OneClickN1.OneClickN1Page">
+<ContentPage x:Name="newsPage" xmlns:i18n="clr-namespace:OneClickN1;assembly=OneClickN1" xmlns="http://xamarin.com/schemas/2014/forms" IsBusy="{Binding Source={x:Reference newsPage}, Path=IsBusy}" xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" xmlns:img="clr-namespace:ImageButton.Abstractions;assembly=ImageButton.Abstractions" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:OneClickN1" x:Class="OneClickN1.OneClickN1Page">
 <AbsoluteLayout>
 <Image x:Name="background" Source="Background.jpg" Aspect="AspectFill" AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 1.0"
                AbsoluteLayout.LayoutFlags="All" />
@@ -10,10 +10,10 @@
 
             <StackLayout WidthRequest="300"
                    HorizontalOptions="Center"
-                   VerticalOptions="CenterAndExpand">
-                <StackLayout Spacing="25">
-                    
-                    <StackLayout>
+                   VerticalOptions="CenterAndExpand"
+                >
+                <StackLayout Spacing="20" >
+                    <StackLayout Padding="0,20,0,0">
                         <Image Source="LogoN1v2.png" />
                     <Label HorizontalOptions="Center" VerticalOptions="Center" TextColor="White">
                         <Label.FormattedText>
@@ -33,22 +33,22 @@
                     </Label>
                     </StackLayout>
       
-                    <StackLayout>
-                    <Entry x:Name="placeholderTags" Placeholder="Введите ключевые слова" PlaceholderColor="Gray" HeightRequest="40" TextChanged="PlaceholderChangedText"  />
-                        <Label x:Name="errorLabel" Text = "По данным ключевым словам ничего не найдено" IsVisible="false" HorizontalTextAlignment="Center" TextColor="Red"/>
+                    <StackLayout Padding="10,0,10,0" >
+                    <Entry x:Name="placeholderTags"  Placeholder="{i18n:Translate placeHolderText}" PlaceholderColor="Gray" HeightRequest="40" TextChanged="PlaceholderChangedText"  />
+                        <Label x:Name="errorLabel" Text = "{i18n:Translate errorMessage}" IsVisible="false" HorizontalTextAlignment="Center" TextColor="Red"/>
                         <Grid>
-                            <Image x:Name="imageButton" Source="back_btn_ina" />
-                            <Button Grid.Row="0" x:Name="searchTagButton" BackgroundColor="Transparent" Text="ПОИСК" FontAttributes="Bold"  HeightRequest="40" Clicked="SearchTagButtonPushed" />
+                            <Image x:Name="imageButton" WidthRequest="30" HeightRequest="40" Source="back_btn_ina" />
+                            <Button Grid.Row="0" x:Name="searchTagButton" BackgroundColor="Transparent" Text="{i18n:Translate searchButton}" FontAttributes="Bold"  HeightRequest="40" Clicked="SearchTagButtonPushed" />
                         </Grid>
                     </StackLayout>
                     <StackLayout>
-                    <Label x:Name="testLabel" Text="OneClick - сервис предоставляющий быстрый поиск новостей по интересующим Вас темам. Введите ключевые слова или предложения для нахождения соответствующих новостей." TextColor="White" FontSize="15" XAlign="Center" />
+                    <Label x:Name="textLabel" FormattedText="{i18n:Translate descriptionText}" TextColor="White" FontSize="15" XAlign="Center" />
                         </StackLayout>
                     <StackLayout Spacing="15" Padding="30" HorizontalOptions="CenterAndExpand" WidthRequest="200">
-                    <Button Text="Перейти к newsN1" Image="N1Logo" TextColor="White" BackgroundColor="Transparent" BorderColor="White" BorderWidth="2" Clicked="N1NewsButton" />
-                        <Button x:Name="telegramButton" Image="telegramLogo" Text="Наш бот в Telegram" BorderColor="White" BackgroundColor="Transparent" TextColor="White" BorderWidth="2" Clicked="TelegramButton"/>
-                        <ffimageloading:CachedImage Source ="https://newsn1.com/img/knews/_backfake.jpg" IsVisible="false" />
-                    </StackLayout>
+                    <Button x:Name="newsn1Button" Text="{i18n:Translate newsN1Button}" Image="N1Logo" TextColor="White" BackgroundColor="Transparent" BorderColor="White" BorderWidth="2" Clicked="N1NewsButton" />
+                        <Button x:Name="telegramButton" Image="telegramLogo" Text="{i18n:Translate telegramButton}" BorderColor="White" BackgroundColor="Transparent" TextColor="White" BorderWidth="2" Clicked="TelegramButton"/>
+<!--                        <ffimageloading:CachedImage Source ="https://newsn1.com/img/knews/_backfake.jpg" IsVisible="false" />
+-->                    </StackLayout>
                 </StackLayout>
             </StackLayout>
         </StackLayout>

@@ -1,14 +1,16 @@
 ﻿﻿using System;
 using Xamarin.Forms;
-using System.ComponentModel;
-using System.Collections.Generic;
+using Xamarin.Forms.Xaml;
+using System.Globalization;
+using System.Reflection;
+using System.Resources;
 
 namespace OneClickN1
 {
     public partial class OneClickN1Page : ContentPage
     {
-        public static String[] tags = new String[] {};
-        public RequestJsonData parser = new RequestJsonData();
+        private static String[] tags = new String[] {};
+        private RequestJsonData parser = new RequestJsonData();
         public static string searchTags;
 
         public OneClickN1Page()
@@ -33,7 +35,7 @@ namespace OneClickN1
          * если нет то появляется сообщение об ошибке и перехода не приосходит.
         */
 
-        public async void SearchTagButtonPushed(object sender, EventArgs args)
+        private async void SearchTagButtonPushed(object sender, EventArgs args)
         {
             IsBusy = true;
             CreateTagsToSearch(tags);
@@ -66,7 +68,7 @@ namespace OneClickN1
          *  на рабочее и не рабочее.
          */
 
-        public void PlaceholderChangedText(object sender, EventArgs args)
+        private void PlaceholderChangedText(object sender, EventArgs args)
         {
             if (placeholderTags.Text == "")
             {
@@ -93,12 +95,12 @@ namespace OneClickN1
          * Методы для открытия сторонних URl на мобильном етелефоне
          */
 
-        public void N1NewsButton(object sender, EventArgs args)
+        private void N1NewsButton(object sender, EventArgs args)
         {
             Device.OpenUri(new Uri("https://newsn1.com/"));
         }
 
-        public void TelegramButton (object sender, EventArgs args)
+        private void TelegramButton (object sender, EventArgs args)
         {
             Device.OpenUri(new Uri("https://telegram.me/OneClickNewsBot"));   
         }

@@ -6,13 +6,12 @@ using OneClickN1.Model;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
-using System.Diagnostics;
 
 namespace OneClickN1
 {
     public partial class OneClickN1NewsPage : ContentPage
     {
-        public RequestJsonData parser = new RequestJsonData();
+        private RequestJsonData parser = new RequestJsonData();
 		public static string newsID;
 
 		private ObservableCollection<News> news { get; set; }
@@ -21,17 +20,17 @@ namespace OneClickN1
         private int offsetNumber;
         private int globalNewsID = 0;
         private bool loadMoreNewsStatus = false;
-        DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+        private DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
 
         public OneClickN1NewsPage()
         {
             news = new ObservableCollection<News>();
             InitializeComponent();
+			loadMoreNewsButton.IsVisible = false;
 			NavigationPage.SetHasNavigationBar(this, false);
             newsList.IsPullToRefreshEnabled = true;
             newsList.ItemsSource = news;
-            GetTaggedNews();
-
+			GetTaggedNews();
 		}
 
         private async void ShowDetails(object sender, Xamarin.Forms.ItemTappedEventArgs e)
@@ -44,13 +43,15 @@ namespace OneClickN1
 			foreach (var temp in getDataFromCollection)
             {
                 newsID = temp.id;
+                //newsID = temp.link;
             }
             this.IsBusy = false;
-            var newsPage = new OneClickN1WebView(newsID);
+			newsList.SelectedItem = null;
+			var newsPage = new OneClickN1WebView(newsID);
             await Navigation.PushAsync(newsPage);
         }
 
-		public void OnTapGestureRecognizerTapped(object sender, EventArgs args)
+		private void OnTapGestureRecognizerTapped(object sender, EventArgs args)
 		{
             this.Navigation.PopAsync();
 		}
@@ -94,7 +95,7 @@ namespace OneClickN1
             }
 		}
 
-		public void placeHolderTextChanged(object sender, EventArgs args)
+		private void placeHolderTextChanged(object sender, EventArgs args)
 		{
             if (newTagsToSeach.Text == "")
 			{
@@ -128,6 +129,7 @@ namespace OneClickN1
                 finally
                 {
                     this.IsBusy = false;
+                    loadMoreNewsButton.IsVisible = true;
                 }
             }
 		}
@@ -140,7 +142,7 @@ namespace OneClickN1
             }
         }
 
-        public async Task FillNewsFromTags()
+        private async Task FillNewsFromTags()
         {
 
             for (int i = 0; i < parser.jArray.Count; i++)
@@ -154,13 +156,15 @@ namespace OneClickN1
                     imageURL = "https://newsn1.com/img/knews/" + parser.jArray[i]["picture"],
                     imageSource = "https://newsn1.com/img/knews/" + parser.jArray[i]["srcicon"],
                     newsSource = WebUtility.HtmlDecode(parser.jArray[i]["srcname"].ToString()),
-                    newsTime = dtDateTime.AddSeconds((double)parser.jArray[i]["kntime"]).ToLocalTime().ToString("HH:mm  dd, MMMM yyyy")
+                    newsTime = dtDateTime.AddSeconds((double)parser.jArray[i]["kntime"]).ToLocalTime().ToString("HH:mm  dd, MMMM yyyy")                
                 });
                 globalNewsID++;
-            }
+
+			}
+
 		}
 
-        public async Task LoadDataAsync(){
+        private async Task LoadDataAsync(){
             await FillNewsFromTags();
         }
 
@@ -175,7 +179,7 @@ namespace OneClickN1
                     offsetNumber = 0;
                     await parser.MakeGetRequest("https://newsn1.com/?mode=query&mask=" + searchTags + "&offset=" + offsetNumber.ToString()+"&fillpic=1");
                     news.Clear();
-                    LoadDataAsync();
+                    await LoadDataAsync();
                     newsList.EndRefresh();
                 } finally {
                     this.IsBusy = false;
@@ -185,22 +189,23 @@ namespace OneClickN1
 
 		}
 
-        private async void LoadMoreNews(object sender,ItemVisibilityEventArgs e) 
-        {
-			errorLabelHeight.Height = 55;
+   //     private async void LoadMoreNews(object sender,ItemVisibilityEventArgs e) 
+   //     {
+			//errorLabelHeight.Height = 55;
 
-			if (loadMoreNewsStatus == false)
-            {
-                if (e.Item == news[news.Count - 1])
-                {
-                    await LoadItems();
-                }
-            }
-        }
+			//if (loadMoreNewsStatus == false)
+        //    {
+        //        if (e.Item == news[news.Count - 1])
+        //        {
+        //            await LoadItems();
+        //        }
+        //    }
+        //}
 
-        private async Task LoadItems()
+        private async void LoadItems(object sender, EventArgs args)
         {
             loadMoreNewsStatus = true;
+            loadMoreNewsButton.IsEnabled = false;
             if (!this.IsBusy)
             {
 
@@ -209,7 +214,7 @@ namespace OneClickN1
                     this.IsBusy = true;
                     offsetNumber += 10;
                     await parser.MakeGetRequest("https://newsn1.com/?mode=query&mask=" + searchTags + "&offset=" + offsetNumber.ToString()+"&fillpic=1");
-                    LoadDataAsync();
+                    await LoadDataAsync();
                 }
                 finally
                 {
@@ -217,7 +222,8 @@ namespace OneClickN1
                 }
             }
             await Task.Delay(500);
-            loadMoreNewsStatus = false;
+            loadMoreNewsButton.IsEnabled = true;
+			loadMoreNewsStatus = false;
         }
     }
 }

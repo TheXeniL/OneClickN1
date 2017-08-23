@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage x:Name="newsPage" IsBusy="{Binding Source={x:Reference newsPage}, Path=IsBusy}" xmlns:local="clr-namespace:OneClickN1;assembly=OneClickN1"   xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions" x:Class="OneClickN1.OneClickN1NewsPage" xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms">
+<ContentPage x:Name="newsPage" xmlns:i18n="clr-namespace:OneClickN1;assembly=OneClickN1" IsBusy="{Binding Source={x:Reference newsPage}, Path=IsBusy}" xmlns:local="clr-namespace:OneClickN1;assembly=OneClickN1"   xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions" x:Class="OneClickN1.OneClickN1NewsPage" xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms">
 	<ContentPage.Content>
         
         <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 <Image x:Name="background" Source="Background.jpg" Aspect="AspectFill" AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 1.0"
                AbsoluteLayout.LayoutFlags="All" />
-
-           
            
         <StackLayout
             AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 1.0"
@@ -30,21 +28,21 @@
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                     <RowDefinition Height="50"/>
-                                <RowDefinition x:Name="errorLabelExtend" Height="50" />
+                    <RowDefinition x:Name="errorLabelExtend" Height="50" />
                             </Grid.RowDefinitions>
                             <Image Source="LogoN1" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="70" HeightRequest="65" Grid.Row="0"  >
                                   <Image.GestureRecognizers>
         <TapGestureRecognizer Tapped="OnTapGestureRecognizerTapped"/>
   </Image.GestureRecognizers>
                                 </Image>
-                            <Entry x:Name="newTagsToSeach" WidthRequest="350" HeightRequest="36" Completed="SearchAnotherTags" HorizontalTextAlignment="Center" FontFamily="Ubuntu" FontSize="16" Keyboard="Text" PlaceholderColor="#9d9d9f" Placeholder="Искать другие новости" HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="0"  Grid.Column="1" TextChanged="placeHolderTextChanged"/>
-                            <Label x:Name="errorLabel" Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="1" HorizontalTextAlignment="Center" Text = "По данным ключевым словам ничего не найдено" IsVisible="false"  TextColor="Red"/>
+                            <Entry x:Name="newTagsToSeach" WidthRequest="350" HeightRequest="36" Completed="SearchAnotherTags" HorizontalTextAlignment="Center" FontFamily="Ubuntu" FontSize="16" Keyboard="Text" PlaceholderColor="#9d9d9f" Placeholder="{i18n:Translate searchAnotherNewsPlaceholder}" HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="0"  Grid.Column="1" TextChanged="placeHolderTextChanged"/>
+                            <Label x:Name="errorLabel" Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="1" HorizontalTextAlignment="Center" Text = "{i18n:Translate errorMessage}" IsVisible="false"  TextColor="Red"/>
 
                 </Grid>
             </Grid>
   
                     <!-- The List view -->
-            <ListView x:Name="newsList" Grid.Row="1" CachingStrategy="RetainElement" BackgroundColor="Transparent" SeparatorVisibility="None" HasUnevenRows="true" Refreshing="RefreshNews" ItemAppearing="LoadMoreNews" ItemTapped="ShowDetails" >
+            <ListView x:Name="newsList" Grid.Row="1" CachingStrategy="RetainElement" BackgroundColor="Transparent" SeparatorVisibility="None" HasUnevenRows="true" Refreshing="RefreshNews" ItemTapped="ShowDetails" >
                         <ListView.ItemTemplate>
                         <DataTemplate>
                         <ViewCell x:Name="viewCell">
@@ -63,7 +61,7 @@
                                                     </StackLayout>
                                             </Grid>
                                             <Grid x:Name="imageGrid" Grid.Row="1" Padding="0" BackgroundColor="White"  >
-                                                    <ffimageloading:CachedImage x:Name="imageNewsUrl" CacheDuration="-1" Source="{Binding imageURL}" LoadingPlaceholder="backwhite250" Aspect="AspectFill" />
+                                                    <ffimageloading:CachedImage x:Name="imageNewsUrl" CacheDuration="1" Source="{Binding imageURL}" LoadingPlaceholder="backwhite250" RetryCount="3" CacheType="Memory" Aspect="AspectFill" />
                                             </Grid>
                                     <Grid Grid.Row="2" BackgroundColor="#ffffff" RowSpacing="0">
                                         <Grid Padding="10" RowSpacing="0">
@@ -72,9 +70,9 @@
                                                 <RowDefinition Height="4" />
                                                 <RowDefinition Height="20" />
                                             </Grid.RowDefinitions>
-                                                    <StackLayout Grid.Row="0"  >
-                                                        <local:MultiLineLabel  x:Name="captionLabel" FormattedText="{Binding caption}" HorizontalOptions="Start" VerticalOptions="Start" FontFamily="Ubuntu-Medium" FontAttributes="Bold" FontSize="15" TextColor="#3c3947"  />
-                                                        <local:MultiLineLabel x:Name="overviewLabel" FormattedText="{Binding overview}" HorizontalOptions="Start" FontFamily="Ubuntu-Light" FontSize="13" TextColor="#3c3947" LineBreakMode="TailTruncation"  />
+                                                    <StackLayout Grid.Row="0" HorizontalOptions="Start" >
+                                                        <local:MultiLineLabel x:Name="captionLabel" FormattedText="{Binding caption}" FontFamily="Ubuntu-Medium" FontAttributes="Bold" FontSize="15" TextColor="#3c3947"  />
+                                                        <local:MultiLineLabel x:Name="overviewLabel" FormattedText="{Binding overview}" FontFamily="Ubuntu-Light" FontSize="14" TextColor="#3c3947"/>
                                                     </StackLayout>
                                         </Grid>
                                     </Grid>
@@ -83,6 +81,13 @@
                                 </ViewCell>
                             </DataTemplate>
                         </ListView.ItemTemplate>
+                        <ListView.Footer>
+    <StackLayout>
+             <Grid>
+            <Button x:Name="loadMoreNewsButton" Text="{i18n:Translate loadMoreNewsButton}" Clicked="LoadItems" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" />
+             </Grid>
+    </StackLayout>               
+</ListView.Footer>
             </ListView>
                     </Grid> 
         </StackLayout>
