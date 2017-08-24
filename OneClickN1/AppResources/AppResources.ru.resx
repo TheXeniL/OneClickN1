@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<root>
+﻿<root>
     <resheader name="resmimetype">
         <value>text/microsoft-resx</value>
     </resheader>
@@ -14,39 +13,39 @@
     </resheader>
 
     <data name="searchButton" >
-        <value>SEARCH</value>
+        <value>ПОИСК</value>
     </data>
 
     <data name="placeHolderText">
-    <value>Enter key words to search</value>
+    <value>Введите ключевые слова</value>
     </data>
 
     <data name="descriptionText" >
-    <value>OneClickN1 is a service that can provide a fast search for news on a desired topic. Enter some key words or sentences to find prefarable news. </value>
+    <value>OneClick - сервис предоставляющий быстрый поиск новостей по интересующим Вас темам. Введите ключевые слова или предложения для нахождения соответствующих новостей.</value>
     </data>
 
     <data name="newsN1Button">
-    <value>NewsN1 website</value>
+    <value>Наш cайт newsN1</value>
     </data>
+	
     <data name="telegramButton">
-    <value>Our telegram bot</value>
+    <value>Наш бот в Telegram</value>
     </data>
 
     <data name="errorMessage">
-    <value>Invalid key words</value>
+    <value>По данным ключевым словам ничего не найдено</value>
     </data>
 
     <data name="searchAnotherNewsPlaceholder">
-    <value>Search another news</value>
+    <value>Найти другие новости</value>
     </data>
 
     <data name="loadMoreNewsButton">
-    <value>Load more news</value>
+    <value>Загрузить еще</value>
     </data>
 
     <data name="backButton">
-    <value>&lt; back</value>
+    <value>&lt; назад</value>
     </data>
-    
 
 </root>

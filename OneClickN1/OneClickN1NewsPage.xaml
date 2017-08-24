@@ -84,7 +84,7 @@
                         <ListView.Footer>
     <StackLayout>
              <Grid>
-            <Button x:Name="loadMoreNewsButton" Text="{i18n:Translate loadMoreNewsButton}" Clicked="LoadItems" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" />
+            <Button x:Name="loadMoreNewsButton" Text="{i18n:Translate loadMoreNewsButton}" Clicked="LoadItems" TextColor="White" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" />
              </Grid>
     </StackLayout>               
 </ListView.Footer>
