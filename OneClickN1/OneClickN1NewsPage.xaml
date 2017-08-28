@@ -30,7 +30,7 @@
                     <RowDefinition Height="50"/>
                     <RowDefinition x:Name="errorLabelExtend" Height="50" />
                             </Grid.RowDefinitions>
-                            <Image Source="LogoN1" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="70" HeightRequest="65" Grid.Row="0"  >
+                            <Image Source="LogoN1v3" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="70" HeightRequest="65" Grid.Row="0"  >
                                   <Image.GestureRecognizers>
         <TapGestureRecognizer Tapped="OnTapGestureRecognizerTapped"/>
   </Image.GestureRecognizers>

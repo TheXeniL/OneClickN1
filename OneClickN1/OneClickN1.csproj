@@ -104,20 +104,19 @@
     <Folder Include="Resources\" />
     <Folder Include="Web\" />
     <Folder Include="Model\" />
-    <Folder Include="ViewModel\" />
     <Folder Include="AppResources\" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\telegramLogo.png" />
-    <BundleResource Include="Resources\LogoN1v2.png" />
     <BundleResource Include="Resources\N1Logo.png" />
     <BundleResource Include="Resources\_backfake.jpg" />
     <BundleResource Include="Resources\back_btn_one.png" />
     <BundleResource Include="Resources\backwhite250.png" />
     <BundleResource Include="Resources\Background.jpg" />
     <BundleResource Include="Resources\back_btn_ina.png" />
-    <BundleResource Include="Resources\LogoN1.png" />
-    <BundleResource Include="Resources\loading.gif" />
+    <BundleResource Include="Resources\LogoN1v3.png" />
+    <BundleResource Include="Resources\LogoN1button.png" />
+    <BundleResource Include="Resources\LogoN1v4.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />

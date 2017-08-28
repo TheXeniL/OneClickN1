@@ -1,9 +1,5 @@
 ﻿﻿using System;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using System.Globalization;
-using System.Reflection;
-using System.Resources;
 
 namespace OneClickN1
 {
@@ -37,26 +33,26 @@ namespace OneClickN1
 
         private async void SearchTagButtonPushed(object sender, EventArgs args)
         {
-            IsBusy = true;
-            CreateTagsToSearch(tags);
-            searchTagButton.IsEnabled = false;
-            imageButton.Source = "back_btn_ina";
-
-            await parser.MakeGetRequest("https://newsn1.com/?mode=query&mask=" + searchTags+"&fillpic=1");
-
-            if (parser.JsonParseSucces == true)
-            {
-                var newsPage = new OneClickN1NewsPage();
-                await Navigation.PushAsync(newsPage);
-				parser.JsonParseSucces = true;
-                placeholderTags.Text = "";
-			}
-            else
-            {
-                errorLabel.IsVisible = true;
+                IsBusy = true;
+                CreateTagsToSearch(tags);
                 searchTagButton.IsEnabled = false;
-                searchTagButton.TextColor = Color.White;
-            }
+                imageButton.Source = "back_btn_ina";
+
+                await parser.MakeGetRequest("https://newsn1.com/?mode=query&mask=" + searchTags + "&fillpic=1");
+
+                if (parser.JsonParseSucces == true)
+                {
+                    var newsPage = new OneClickN1NewsPage();
+                    await Navigation.PushAsync(newsPage);
+                    parser.JsonParseSucces = true;
+                    placeholderTags.Text = "";
+                }
+                else
+                {
+                    errorLabel.IsVisible = true;
+                    searchTagButton.IsEnabled = false;
+                    searchTagButton.TextColor = Color.White;
+                }
 
             searchTags = null;
 			IsBusy = false;
@@ -116,5 +112,6 @@ namespace OneClickN1
 				searchTags += tagsToSearchFor[i] + "+";
 			}
 		}
-    }
+
+	}
 }

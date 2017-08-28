@@ -14,7 +14,7 @@
                 >
                 <StackLayout Spacing="20" >
                     <StackLayout Padding="0,20,0,0">
-                        <Image Source="LogoN1v2.png" />
+                        <Image Source="LogoN1v4" WidthRequest="75" HeightRequest="75" />
                     <Label HorizontalOptions="Center" VerticalOptions="Center" TextColor="White">
                         <Label.FormattedText>
                         <FormattedString>
@@ -45,7 +45,7 @@
                     <Label x:Name="textLabel" FormattedText="{i18n:Translate descriptionText}" TextColor="White" FontSize="15" XAlign="Center" />
                         </StackLayout>
                     <StackLayout Spacing="15" Padding="20" WidthRequest="190" HorizontalOptions="CenterAndExpand">
-                    <Button x:Name="newsn1Button" Text="{i18n:Translate newsN1Button}" Image="N1Logo" TextColor="White" BackgroundColor="Transparent" BorderColor="White" BorderWidth="2" Clicked="N1NewsButton" />
+                    <Button x:Name="newsn1Button" Text="{i18n:Translate newsN1Button}" Image="LogoN1button" TextColor="White" BackgroundColor="Transparent" BorderColor="White" BorderWidth="2" Clicked="N1NewsButton" />
                         <Button x:Name="telegramButton" Image="telegramLogo" Text="{i18n:Translate telegramButton}" BorderColor="White" BackgroundColor="Transparent" TextColor="White" BorderWidth="2" Clicked="TelegramButton"/>
 <!--                        <ffimageloading:CachedImage Source ="https://newsn1.com/img/knews/_backfake.jpg" IsVisible="false" />
 -->                    </StackLayout>

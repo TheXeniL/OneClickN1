@@ -7,6 +7,8 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using FFImageLoading.Forms.Droid;
+using ImageCircle.Forms.Plugin.Droid;
+
 
 
 
@@ -24,6 +26,9 @@ namespace OneClickN1.Droid
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             CachedImageRenderer.Init();
+			ImageCircleRenderer.Init();
+
+
 
 			LoadApplication(new App());
         }

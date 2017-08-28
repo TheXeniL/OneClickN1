@@ -1,8 +1,13 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -14,27 +19,65 @@
                         <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <subviews/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoN1v4.png" translatesAutoresizingMaskIntoConstraints="NO" id="jsA-zb-gq2">
+                                <rect key="frame" x="67" y="269" width="241" height="129"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0RZ-eJ-0tq">
+                                <rect key="frame" x="0.0" y="1" width="376" height="666"/>
+                                <color key="backgroundColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XDh-vL-2Cj">
+                                <rect key="frame" x="0.0" y="1" width="376" height="666"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rD4-Xh-YKw">
+                                        <rect key="frame" x="0.0" y="0.0" width="376" height="666"/>
+                                        <color key="backgroundColor" red="0.13430553674697876" green="0.29100215435028076" blue="0.39036601781845093" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoN1v4.png" translatesAutoresizingMaskIntoConstraints="NO" id="k1M-sQ-mWh">
+                                        <rect key="frame" x="127" y="226" width="123" height="108"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="108" id="USQ-z8-M42"/>
+                                            <constraint firstAttribute="width" constant="123" id="hgo-gl-Hgk"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="rD4-Xh-YKw" firstAttribute="leading" secondItem="XDh-vL-2Cj" secondAttribute="leading" id="7n4-uf-GXl"/>
+                                    <constraint firstAttribute="trailing" secondItem="rD4-Xh-YKw" secondAttribute="trailing" id="fx3-iQ-XeY"/>
+                                    <constraint firstAttribute="bottom" secondItem="rD4-Xh-YKw" secondAttribute="bottom" id="vab-Gb-E8E"/>
+                                    <constraint firstItem="k1M-sQ-mWh" firstAttribute="centerX" secondItem="rD4-Xh-YKw" secondAttribute="centerX" id="x1M-Ys-2UE"/>
+                                    <constraint firstItem="rD4-Xh-YKw" firstAttribute="top" secondItem="XDh-vL-2Cj" secondAttribute="top" id="x8u-SG-LzF"/>
+                                    <constraint firstItem="k1M-sQ-mWh" firstAttribute="centerY" secondItem="rD4-Xh-YKw" secondAttribute="centerY" constant="-53" id="yt6-I3-ow8"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="XDh-vL-2Cj" firstAttribute="leading" secondItem="0RZ-eJ-0tq" secondAttribute="leading" id="01f-Ea-7bG"/>
+                            <constraint firstItem="jsA-zb-gq2" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="51" id="0SE-bY-Ni7"/>
+                            <constraint firstItem="jsA-zb-gq2" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="3wL-LU-2n6"/>
+                            <constraint firstItem="0RZ-eJ-0tq" firstAttribute="centerX" secondItem="jsA-zb-gq2" secondAttribute="centerX" id="7bO-x6-asM"/>
+                            <constraint firstItem="0RZ-eJ-0tq" firstAttribute="centerY" secondItem="jsA-zb-gq2" secondAttribute="centerY" id="7fy-WL-Xzl"/>
+                            <constraint firstItem="XDh-vL-2Cj" firstAttribute="bottom" secondItem="xb3-aO-Qok" secondAttribute="top" id="8Ri-u9-G2j"/>
+                            <constraint firstItem="XDh-vL-2Cj" firstAttribute="top" secondItem="0RZ-eJ-0tq" secondAttribute="top" id="Eon-CB-lx2"/>
+                            <constraint firstItem="jsA-zb-gq2" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="IjV-ai-ai5"/>
+                            <constraint firstItem="XDh-vL-2Cj" firstAttribute="trailing" secondItem="0RZ-eJ-0tq" secondAttribute="trailing" id="IzU-aN-StT"/>
+                            <constraint firstItem="0RZ-eJ-0tq" firstAttribute="bottom" secondItem="xb3-aO-Qok" secondAttribute="top" id="KOK-xf-j0A"/>
+                            <constraint firstItem="jsA-zb-gq2" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="249" id="bzI-Wz-ndF"/>
+                            <constraint firstItem="0RZ-eJ-0tq" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="kh7-hO-Bi6"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
     <resources>
-        <image name="telegramLogo.png" width="30" height="30"/>
-        <image name="LogoN1v2.png" width="86" height="79"/>
-        <image name="N1Logo.png" width="33" height="30"/>
-        <image name="_backfake.jpg" width="500" height="2"/>
-        <image name="back_btn_one.png" width="300" height="42"/>
-        <image name="backwhite250.png" width="350" height="250"/>
-        <image name="Background.jpg" width="800" height="600"/>
-        <image name="back_btn_ina.png" width="300" height="42"/>
-        <image name="LogoN1.png" width="100" height="100"/>
-        <image name="loading.gif" width="400" height="300"/>
+        <image name="LogoN1v4.png" width="847" height="735"/>
     </resources>
 </document>

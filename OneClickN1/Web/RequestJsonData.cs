@@ -18,7 +18,6 @@ namespace OneClickN1
         {
             var request = WebRequest.Create(url);
 
-
             try
             {
                 HttpWebResponse response = await request.GetResponseAsync() as HttpWebResponse;
@@ -41,6 +40,7 @@ namespace OneClickN1
                 }
 
             }
+
             catch(Exception e)
             {
                 HttpConnectStatus = false;
