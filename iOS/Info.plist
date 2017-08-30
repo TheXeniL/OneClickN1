@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDisplayName</key>
-	<string>OneClickN1</string>
+	<string>OneClickNews</string>
 	<key>CFBundleName</key>
-	<string>OneClickN1</string>
+	<string>OneClickNews</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.navigator.oneclickn1</string>
+	<string>com.navigator.oneclicknews</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
@@ -27,8 +27,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>

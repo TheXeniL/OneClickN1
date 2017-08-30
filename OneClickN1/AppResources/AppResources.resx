@@ -22,7 +22,7 @@
     </data>
 
     <data name="descriptionText" >
-    <value>OneClickN1 is a service that can provide a fast search for news on a desired topic. Enter some key words or sentences to find prefarable news. </value>
+    <value>OneClick is a service that provides a quick search for news on topics interest you. Enter keywords or sentence to find relevant news.</value>
     </data>
 
     <data name="newsN1Button">
@@ -33,7 +33,7 @@
     </data>
 
     <data name="errorMessage">
-    <value>Invalid key words</value>
+    <value>News not found</value>
     </data>
 
     <data name="searchAnotherNewsPlaceholder">
@@ -47,6 +47,5 @@
     <data name="backButton">
     <value>&lt; back</value>
     </data>
-    
 
 </root>

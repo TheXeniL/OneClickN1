@@ -1,15 +1,19 @@
-﻿using System.Reflection;
+﻿using FFImageLoading;
+using FFImageLoading.Config;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace OneClickN1
 {
     public partial class App : Application
     {
-        
-        public App()
+
+        public static void Initialize(Configuration config) { }
+
+
+		public App()
         {
-            InitializeComponent();
+			ImageService.Instance.InvalidateMemoryCache();
+			InitializeComponent();
             MainPage = new NavigationPage (new OneClickN1Page()){ BarTextColor = Color.White };
 
 			if (Device.OS == TargetPlatform.iOS || Device.OS == TargetPlatform.Android)
@@ -23,14 +27,15 @@ namespace OneClickN1
 
         protected override void OnStart()
         {
-            // Handle when your app starts
-        }
+			// Handle when your app starts
+			ImageService.Instance.InvalidateMemoryCache();
+		}
 
         protected override void OnSleep()
         {
-            // Handle when your app sleeps
-
-        }
+			// Handle when your app sleeps
+            ImageService.Instance.InvalidateMemoryCache();
+		}
 
         protected override void OnResume()
         {

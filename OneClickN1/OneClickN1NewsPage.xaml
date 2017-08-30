@@ -37,7 +37,6 @@
                                 </Image>
                             <Entry x:Name="newTagsToSeach" WidthRequest="350" HeightRequest="36" Completed="SearchAnotherTags" HorizontalTextAlignment="Center" FontFamily="Ubuntu" FontSize="16" Keyboard="Text" PlaceholderColor="#9d9d9f" Placeholder="{i18n:Translate searchAnotherNewsPlaceholder}" HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="0"  Grid.Column="1" TextChanged="placeHolderTextChanged"/>
                             <Label x:Name="errorLabel" Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="1" HorizontalTextAlignment="Center" Text = "{i18n:Translate errorMessage}" IsVisible="false"  TextColor="Red"/>
-
                 </Grid>
             </Grid>
   
@@ -61,7 +60,7 @@
                                                     </StackLayout>
                                             </Grid>
                                             <Grid x:Name="imageGrid" Grid.Row="1" Padding="0" BackgroundColor="White"  >
-                                                    <ffimageloading:CachedImage x:Name="imageNewsUrl" CacheDuration="1" Source="{Binding imageURL}" LoadingPlaceholder="backwhite250" RetryCount="3" CacheType="Memory" Aspect="AspectFill" />
+                                                    <ffimageloading:CachedImage x:Name="imageNewsUrl" CacheDuration="1" Source="{Binding imageURL}" LoadingPlaceholder="backwhite250" RetryCount="3" CacheType="Memory" DownsampleToViewSize="true" Aspect="AspectFill" />
                                             </Grid>
                                     <Grid Grid.Row="2" BackgroundColor="#ffffff" RowSpacing="0">
                                         <Grid Padding="10" RowSpacing="0">
