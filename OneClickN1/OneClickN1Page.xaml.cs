@@ -12,6 +12,13 @@ namespace OneClickN1
         public OneClickN1Page()
         {
             InitializeComponent();
+
+            if (Device.OS == TargetPlatform.Android)
+            {
+				placeholderTags.PlaceholderColor = Color.White;
+                placeholderTags.TextColor = Color.White;
+
+			}
 			NavigationPage.SetHasNavigationBar(this, false);
 
             /* 

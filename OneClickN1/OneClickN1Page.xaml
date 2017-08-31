@@ -21,9 +21,9 @@
                         <Span x:Name="titleLabel" Text="oneclick"  FontSize="30">
                         <Span.FontFamily>
                                       <OnPlatform x:TypeArguments="x:String">
-                                      <OnPlatform.iOS>FredokaOne-Regular</OnPlatform.iOS>
-                                            <OnPlatform.Android>FredokaOne-Regular.tff#FredokaOne-Regular</OnPlatform.Android> 
-                                        </OnPlatform>   
+                                      <On Platform="iOS" Value="FredokaOne-Regular" />
+<!--                                                    <On Platform="Android" Value="Fonts/FredokaOne-Regular.ttf#FredokaOne-Regular" />
+-->                                        </OnPlatform>   
                                     </Span.FontFamily>
                                 </Span>
                                 <Span Text=".newsN1" FontSize="30" />
@@ -34,7 +34,8 @@
                     </StackLayout>
       
                     <StackLayout Padding="10,0,10,0" >
-                    <Entry x:Name="placeholderTags"  Placeholder="{i18n:Translate placeHolderText}" PlaceholderColor="Gray" HeightRequest="40" TextChanged="PlaceholderChangedText"  />
+                    <Entry x:Name="placeholderTags" Placeholder="{i18n:Translate placeHolderText}" PlaceholderColor="Gray" HeightRequest="40" TextChanged="PlaceholderChangedText" >
+                        </Entry>
                         <Label x:Name="errorLabel" Text = "{i18n:Translate errorMessage}" IsVisible="false" HorizontalTextAlignment="Center" TextColor="Red"/>
                         <Grid>
                             <Image x:Name="imageButton" WidthRequest="30" HeightRequest="40" Source="back_btn_ina" />

@@ -9,7 +9,6 @@ namespace OneClickN1
 
         public static void Initialize(Configuration config) { }
 
-
 		public App()
         {
 			ImageService.Instance.InvalidateMemoryCache();

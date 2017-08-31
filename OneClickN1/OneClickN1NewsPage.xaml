@@ -60,8 +60,9 @@
                                                     </StackLayout>
                                             </Grid>
                                             <Grid x:Name="imageGrid" Grid.Row="1" Padding="0" BackgroundColor="White"  >
-                                                    <ffimageloading:CachedImage x:Name="imageNewsUrl" CacheDuration="1" Source="{Binding imageURL}" LoadingPlaceholder="backwhite250" RetryCount="3" CacheType="Memory" DownsampleToViewSize="true" Aspect="AspectFill" />
-                                            </Grid>
+                                                  <ffimageloading:CachedImage x:Name="imageNewsUrl" CacheDuration="1" Source="{Binding imageURL}" LoadingPlaceholder="backwhite250" RetryCount="3" CacheType="Memory" Aspect="AspectFill" />
+<!--                                                <Image x:Name="imageNewsUrl" Source="{Binding imageURL}" Aspect="AspectFill" />
+-->                                            </Grid>
                                     <Grid Grid.Row="2" BackgroundColor="#ffffff" RowSpacing="0">
                                         <Grid Padding="10" RowSpacing="0">
                                             <Grid.RowDefinitions>
