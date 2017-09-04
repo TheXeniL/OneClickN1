@@ -10,8 +10,6 @@ using FFImageLoading.Forms.Droid;
 using ImageCircle.Forms.Plugin.Droid;
 
 
-
-
 namespace OneClickN1.Droid
 {
     [Activity(Label = "OneClickN1.Droid", Icon = "@drawable/icon", Theme = "@style/MyTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
