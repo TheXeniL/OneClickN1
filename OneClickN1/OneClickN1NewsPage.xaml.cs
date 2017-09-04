@@ -26,6 +26,19 @@ namespace OneClickN1
         {
             news = new ObservableCollection<News>();
             InitializeComponent();
+
+		/*
+         * На устройстве Android приходится изменять некоторые параметры элементов графического интерфейса
+         * для корректного отображения.
+         */
+
+			if (Device.OS == TargetPlatform.Android)
+			{
+                searchGrid.Padding = new Thickness(0,0,0,1);
+                errorLabelHeight.Height = 45;
+                overralHeight.Height = 450;
+			}
+
 			loadMoreNewsButton.IsVisible = false;
 			NavigationPage.SetHasNavigationBar(this, false);
             newsList.IsPullToRefreshEnabled = true;
@@ -33,7 +46,12 @@ namespace OneClickN1
 			GetTaggedNews();
 		}
 
-        private async void ShowDetails(object sender, Xamarin.Forms.ItemTappedEventArgs e)
+		/*
+         * Метод при помощи локального ID вычисляет какой элемент списка был нажат и переносит пользователя на другую страницу
+         * где ID новости используется для перехода на сайт новости.
+         */
+
+		private async void ShowDetails(object sender, Xamarin.Forms.ItemTappedEventArgs e)
         {
             this.IsBusy = true;
 			var index = (newsList.ItemsSource as ObservableCollection<News>).IndexOf(e.Item as News);
@@ -43,13 +61,14 @@ namespace OneClickN1
 			foreach (var temp in getDataFromCollection)
             {
                 newsID = temp.id;
-                //newsID = temp.link;
             }
+
             this.IsBusy = false;
 			newsList.SelectedItem = null;
 			var newsPage = new OneClickN1WebView(newsID);
             await Navigation.PushAsync(newsPage);
         }
+
 
 		private void OnTapGestureRecognizerTapped(object sender, EventArgs args)
 		{
@@ -57,7 +76,8 @@ namespace OneClickN1
 		}
 
         /*
-         * Данный метод позволяет на странице найденных новостей вводить другие теги для поиска новостей, не переходя на предыдущую страницу
+         * Данный метод позволяет на странице найденных новостей вводить другие теги для поиска новостей, 
+         * не переходя на предыдущую страницу
          */
 
         private async void SearchAnotherTags(object sender, EventArgs args)
@@ -77,7 +97,7 @@ namespace OneClickN1
                     if (parser.JsonParseSucces == true)
 					{
 						news.Clear();
-						LoadDataAsync();
+                        FillNewsFromTags();
 						newTagsToSeach.Text = null;
                         errorLabelHeight.Height = 55;
 					}
@@ -95,23 +115,22 @@ namespace OneClickN1
             }
 		}
 
-		private void placeHolderTextChanged(object sender, EventArgs args)
+		/*
+         * Метод для сброса сообщения об ошибке при вводе неккоректных ключевых слов
+         */
+		
+        private void placeHolderTextChanged(object sender, EventArgs args)
 		{
-            if (newTagsToSeach.Text == "")
-			{
 				errorLabel.IsVisible = false;
 				errorLabelHeight.Height = 55;
-			}
-
-			else
-			{
-                errorLabel.IsVisible = false;
-				errorLabelHeight.Height = 55;
-			}
-
 		}
 
-        private async void GetTaggedNews()
+
+		/*
+         * Метод для заполнения таблицы новостями.
+         */
+
+		private async void GetTaggedNews()
         {
             if (!this.IsBusy)
             {
@@ -122,7 +141,7 @@ namespace OneClickN1
                     offsetNumber = 0;
                     searchTags = OneClickN1Page.searchTags;
                     await parser.MakeGetRequest("https://newsn1.com/?mode=query&mask=" + searchTags + "&offset=" + offsetNumber.ToString()+"&fillpic=1");
-                    LoadDataAsync();
+                    FillNewsFromTags();
 					newsList.EndRefresh();
                 }
 
@@ -134,7 +153,11 @@ namespace OneClickN1
             }
 		}
 
-        private void CreateTagsToSearch (string[] tagsToSearchFor)
+		/*
+         * Разделение введенных слов с помощью разделителя "+"
+         */
+
+		private void CreateTagsToSearch (string[] tagsToSearchFor)
         {
             for (int i = 0; i < tagsToSearchFor.Length;i++)
             {
@@ -142,7 +165,13 @@ namespace OneClickN1
             }
         }
 
-        private async Task FillNewsFromTags()
+
+		/*
+         * Метод для заполнения коллекции новостями, заполняются такие параметры как Id новости, тема, 
+         * небольшая справка, картинка и т.д.
+         */
+
+		private void FillNewsFromTags()
         {
 
             for (int i = 0; i < parser.jArray.Count; i++)
@@ -164,23 +193,24 @@ namespace OneClickN1
 
 		}
 
-        private async Task LoadDataAsync(){
-            await FillNewsFromTags();
-        }
+		/*
+         * Метод для обновления таблицы новостей
+         */
 
-        private async void RefreshNews(object sender, EventArgs args)
+		private async void RefreshNews(object sender, EventArgs args)
         {
             if (!this.IsBusy)
             {
                 try
                 {
                     this.IsBusy = true;
-                    globalNewsID = 0;
+                    globalNewsID = 0; // обнуляем ID новостей так как список новостей будет загружен с начала
                     offsetNumber = 0;
                     await parser.MakeGetRequest("https://newsn1.com/?mode=query&mask=" + searchTags + "&offset=" + offsetNumber.ToString()+"&fillpic=1");
                     news.Clear();
-                    await LoadDataAsync();
+                    FillNewsFromTags();
                     newsList.EndRefresh();
+
                 } finally {
                     this.IsBusy = false;
 					errorLabelHeight.Height = 55;
@@ -189,23 +219,15 @@ namespace OneClickN1
 
 		}
 
-   //     private async void LoadMoreNews(object sender,ItemVisibilityEventArgs e) 
-   //     {
-			//errorLabelHeight.Height = 55;
+		/*
+         * Метод для подгрузки следующих 15 новостей
+         */
 
-			//if (loadMoreNewsStatus == false)
-        //    {
-        //        if (e.Item == news[news.Count - 1])
-        //        {
-        //            await LoadItems();
-        //        }
-        //    }
-        //}
-
-        private async void LoadItems(object sender, EventArgs args)
+		private async void LoadItems(object sender, EventArgs args)
         {
             loadMoreNewsStatus = true;
             loadMoreNewsButton.IsEnabled = false;
+
             if (!this.IsBusy)
             {
 
@@ -214,14 +236,14 @@ namespace OneClickN1
                     this.IsBusy = true;
                     offsetNumber += 10;
                     await parser.MakeGetRequest("https://newsn1.com/?mode=query&mask=" + searchTags + "&offset=" + offsetNumber.ToString()+"&fillpic=1");
-                    await LoadDataAsync();
+                    FillNewsFromTags();
                 }
                 finally
                 {
                     this.IsBusy = false;
                 }
             }
-            await Task.Delay(500);
+
             loadMoreNewsButton.IsEnabled = true;
 			loadMoreNewsStatus = false;
         }

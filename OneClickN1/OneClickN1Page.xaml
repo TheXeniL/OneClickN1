@@ -22,8 +22,8 @@
                         <Span.FontFamily>
                                       <OnPlatform x:TypeArguments="x:String">
                                       <On Platform="iOS" Value="FredokaOne-Regular" />
-<!--                                                    <On Platform="Android" Value="Fonts/FredokaOne-Regular.ttf#FredokaOne-Regular" />
--->                                        </OnPlatform>   
+                                                    <On Platform="Android" Value="FredokaOne-Regular.ttf#FredokaOne-Regular" />
+                                        </OnPlatform>   
                                     </Span.FontFamily>
                                 </Span>
                                 <Span Text=".newsN1" FontSize="30" />
